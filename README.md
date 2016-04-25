@@ -38,6 +38,12 @@
 
 * STRETCH GOAL: Use local storage(angular has an external library for local storage) or a PostgreSQL database to persist data(you'll need an express backend to use PostgreSQL).
 
+## Bonus Features
+
+* A user can choose to sort ascending or descending
+* A user can favorite posts and view all favorites in a separate tab
+* A user can upload an image (no backend involved)
+
 ### Remove contents of readme.md and replace with setup instructions and description of repo
 
 ### Source readme.md
