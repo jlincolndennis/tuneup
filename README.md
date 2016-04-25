@@ -1,5 +1,13 @@
 # Reddit Clone
 
+## How to turn this in:
+
+* Submit a pull request when Finished
+
+## Due date
+
+* Friday April 29th 2016 5pm
+
 ## Requirements:  
 
 * Each post has a title, author, image, date, comments, votes, and description.
@@ -30,10 +38,8 @@
 
 * STRETCH GOAL: Use local storage(angular has an external library for local storage) or a PostgreSQL database to persist data(you'll need an express backend to use PostgreSQL).
 
+### Remove contents of readme.md and replace with setup instructions and description of repo
+
 ### Source readme.md
 
 * Angular curriculum readme.md(watch video walkthrough): [https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/11-reddit-clone.md]('https://github.com/gSchool/angular-curriculum/blob/master/Unit-1/11-reddit-clone.md')
-
-## How to turn this in:
-
-* Submit a pull request when Finished
