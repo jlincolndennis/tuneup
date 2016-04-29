@@ -123,7 +123,11 @@ app.directive('timeless', function() {
 })
 
 app.controller('MainController', function($scope){
-  $scope.vm = {}
+  $scope.vm = {};
+  $scope.form ={};
+  $scope.activePost= {};
+  $scope.comment = {};
+
   $scope.changeSorting = function (sortCriteria) {
     $scope.vm.sort = sortCriteria
   }
@@ -136,7 +140,6 @@ app.controller('MainController', function($scope){
     post.votes--;
   }
   $scope.formSubmit = function (){
-  console.log(myForm.$valid);
   $scope.form.votes = 0;
   $scope.form.comments = [];
   $scope.form.date = new Date();
@@ -150,6 +153,26 @@ $scope.formClose = function () {
   $scope.myForm.$setUntouched();
 }
 
+$scope.revealComments = function (post) {
+  post.showComments = !post.showComments
+}
+
+$scope.makeAComment = function (post) {
+  $scope.activePost = post
+}
+
+$scope.commentFormSubmit = function () {
+  console.log("111111111111111", $scope.activePost);
+
+  $scope.activePost.comments.push($scope.comment);
+  $scope.comment = {};
+  $scope.commentForm.$setUntouched();
+}
+
+$scope.commentFormClose = function () {
+  $scope.comment = {};
+  $scope.commentForm.$setUntouched();
+}
   $scope.data = [
     { title:  "What It's Like Teaching g20",
       image: 'http://i.imgur.com/YXz7X7w.png',
@@ -157,7 +180,16 @@ $scope.formClose = function () {
       author: "SpicyChocoLatte",
       date: new Date(),
       votes: 23,
-      comments: []
+      showComments: false,
+      comments: [
+        {
+        commentAuthor: "Zdarsky",
+        commentBody: "I am a neat guy"
+      },{
+        commentAuthor: "Fraction",
+        commentBody: "Everything Chip says is a lie!"
+      }
+    ]
     },
    {
      title:  '"How did you make it search as you typed?"',
@@ -166,6 +198,7 @@ $scope.formClose = function () {
      author: "BodaciousBud",
      date: new Date("April 3, 2016"),
      votes: 23,
+     showComments: false,
      comments: []
    },
    {
@@ -175,7 +208,13 @@ $scope.formClose = function () {
      author: "courtm187",
      date: new Date("March 25, 2016"),
      votes: 10,
-     comments: []
+     showComments: false,
+     comments: [
+       {
+       commentAuthor: "Romeo",
+       commentBody: "Yo, what up girl?"
+     }
+     ]
    },
    {
      title:  "When the Page Doesn't Load",
@@ -184,6 +223,7 @@ $scope.formClose = function () {
      author: "Mike-Ferg-a-nator",
      date: new Date("March 25, 2016"),
      votes: 10,
+     showComments: false,
      comments: []
    },
    {
@@ -193,6 +233,7 @@ $scope.formClose = function () {
      author: "SpicyChocoLatte",
      date: new Date("March 25, 2016"),
      votes: 10,
+     showComments: false,
      comments: []
    },
    {
@@ -202,6 +243,7 @@ $scope.formClose = function () {
      author: "lastlincoln",
      date: new Date("March 25, 2016"),
      votes: 10,
+     showComments: false,
      comments: []
    },
    {
@@ -211,6 +253,7 @@ $scope.formClose = function () {
      author: "SpicyChocoLatte",
      date: new Date("January 2, 2016"),
      votes: 50,
+     showComments: false,
      comments: []
    },
    {
@@ -220,6 +263,7 @@ $scope.formClose = function () {
      author: "Mike-Ferg-a-nator",
      date: new Date("March 9, 2016"),
      votes: 4,
+     showComments: false,
      comments: []
    },
    {
@@ -229,6 +273,7 @@ $scope.formClose = function () {
      author: "lastlincoln",
      date: new Date("February 26, 2016"),
      votes: 1,
+     showComments: false,
      comments: []
    }
  ];

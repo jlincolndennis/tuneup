@@ -37,7 +37,7 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><button type="button" class="btn navbar-btn" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Submit a Post</button></li>
+          <li><button type="button" class="btn navbar-btn" data-toggle="modal" data-target="#postCreate"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Submit a Post</button></li>
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
               <input type="text" class="form-control" ng-model='search' placeholder="Search">
@@ -56,12 +56,12 @@
     </div><!-- /.container-fluid -->
   </nav>
 
-  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal fade" id="postCreate" tabindex="-1" role="dialog" aria-labelledby="postCreateLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="myModalLabel">Submit a Post</h4>
+          <h4 class="modal-title" id="postCreatelLabel">Submit a Post</h4>
         </div>
         <div class="modal-body">
           <form name="myForm" novalidate ng-submit="formSubmit()">
@@ -73,7 +73,7 @@
               </div>
             </fieldset>
             <fieldset class="form-group" ng-class="{'has-error': myForm.description.$invalid && myForm.description.$touched, 'has-success': myForm.description.$valid}">
-              <label>Description</label>
+              <label class="control-label">Description</label>
               <input type="text" class="form-control" name="description" ng-model="form.description" required ng-minlength="3" placeholder="Enter a description">
               <div ng-messages="myForm.description.$error" ng-if="myForm.description.$touched">
                 <p ng-message="minlength" class="control-label">Description must be at least 3 characters</p>
@@ -81,7 +81,7 @@
               </div>
             </fieldset>
             <fieldset class="form-group" ng-class="{'has-error': myForm.image.$invalid && myForm.image.$touched, 'has-success': myForm.image.$valid}">
-              <label>Image URL</label>
+              <label class="control-label">Image URL</label>
               <input type="url" class="form-control" name="image" ng-model="form.image" required placeholder="Enter an image URL">
               <div ng-messages="myForm.image.$error" ng-if="myForm.image.$touched">
                 <p ng-message="required" class="control-label">An image URL is required.</p>
@@ -89,7 +89,7 @@
               </div>
             </fieldset>
             <fieldset class="form-group" ng-class="{'has-error': myForm.author.$invalid && myForm.author.$touched, 'has-success': myForm.author.$valid}">
-              <label>Author</label>
+              <label class="control-label">Author</label>
               <input type="text" class="form-control" name="author" ng-model="form.author" required ng-minlength="2" placeholder="Enter an author">
               <div ng-messages="myForm.author.$error" ng-if="myForm.author.$touched">
                 <p ng-message="minlength" class="control-label">Author name must be at least 2 characters.</p>
@@ -98,8 +98,42 @@
             </fieldset>
             <div class="modal-footer">
               <button type="button" class="btn cancel-button" data-dismiss="modal" ng-click="formClose()">Close</button>
-              <button type="submit" class="btn submit-button" data-toggle="modal" data-target="#myModal" ng-disabled="myForm.$invalid">Save Post</button>
+              <button type="submit" class="btn submit-button" data-toggle="modal" data-target="#postCreate" ng-disabled="myForm.$invalid">Submit Post</button>
             </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade comment-modal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="commentModalLabel">Comment On "{{activePost.title}}"</h4>
+        </div>
+        <div class="modal-body">
+          <form name="commentForm" novalidate ng-submit="commentFormSubmit()">
+            <fieldset class="form-group" ng-class="{'has-error': commentForm.author.$invalid && commentForm.author.$touched, 'has-success': commentForm.author.$valid}">
+              <label class="control-label">Author</label>
+              <input type="text" class="form-control" name="author" ng-model="comment.commentAuthor" required placeholder="Enter an Author">
+              <div ng-messages="commentForm.author.$error" ng-if="commentForm.author.$touched">
+                <p ng-message="required" class="control-label">Author name is required.</p>
+              </div>
+            </fieldset>
+            <fieldset class="form-group" ng-class="{'has-error': commentForm.text.$invalid && commentForm.text.$touched, 'has-success': commentForm.text.$valid}">
+              <label class="control-label">Comment</label>
+              <textarea type="text" class="form-control" name="text" ng-model="comment.commentBody" required placeholder="Enter a Comment"></textarea>
+              <div ng-messages="commentForm.text.$error" ng-if="commentForm.text.$touched">
+                <p ng-message="required" class="control-label">Comment is required.</p>
+              </div>
+            </fieldset>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn cancel-button" data-dismiss="modal" ng-click="commentFormClose()">Close</button>
+            <button type="submit" class="btn submit-button" data-toggle="modal" data-target=".comment-modal" ng-disabled="commentForm.$invalid">Submit Comment</button>
           </form>
         </div>
       </div>
@@ -118,10 +152,16 @@
           <h5>Posted by: {{datum.author}}</h5>
           <p>{{datum.description}}</p>
 
-          <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"> </span> <timeless time="datum.date"></timeless> | <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comments ({{datum.comments.length}}) | <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Add a comment</p>
+          <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"> </span> <timeless time="datum.date"></timeless> | <span ng-click="revealComments(datum)" class="glyphicon glyphicon-comment" aria-hidden="true"></span> View
+            <ng-pluralize count="datum.comments.length" when="{'1': 'Comment', 'other': 'Comments'}"> </ng-pluralize>
+            ({{datum.comments.length}}) | <span class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="modal" data-target=".comment-modal" ng-click="makeAComment(datum)"></span> Add a comment</p>
+
+            <div ng-repeat="comment in datum.comments" ng-show="datum.showComments">
+              <p><strong><span ng-bind="comment.commentAuthor"></span></strong>: <span ng-bind="comment.commentBody"></span></p>
+            </div>
           </div>
-      </article>
-    </section>
-</main>
-</body>
-</html>
+        </article>
+      </section>
+    </main>
+  </body>
+  </html>
