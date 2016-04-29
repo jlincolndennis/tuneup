@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="redditClone">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+  <script src="app.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="style.css">
+  <title>Faux-Reddit</title>
+</head>
+<body ng-controller='MainController'>
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Faux Reddit</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><button type="button" class="btn navbar-btn" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Submit a Post</button></li>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" ng-model='search' placeholder="Search">
+            </div>
+          </form>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort by... <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+              <li><a ng-click="changeSorting('-votes')">Most Votes</a></li>
+              <li><a ng-click="changeSorting('title')">Alphabetically</a></li>
+              <li><a ng-click="changeSorting('-date')">Newest</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Submit a Post</h4>
+        </div>
+        <div class="modal-body">
+          <form name="myForm" novalidate ng-submit="formSubmit()">
+            <fieldset class="form-group" ng-class="{'has-error': myForm.title.$invalid && myForm.title.$touched, 'has-success': myForm.title.$valid}">
+              <label class="control-label">Title</label>
+              <input type="text" class="form-control" name="title" ng-model="form.title" required placeholder="Enter a title">
+              <div ng-messages="myForm.title.$error" ng-if="myForm.title.$touched">
+                <p ng-message="required" class="control-label">Title is required.</p>
+              </div>
+            </fieldset>
+            <fieldset class="form-group" ng-class="{'has-error': myForm.description.$invalid && myForm.description.$touched, 'has-success': myForm.description.$valid}">
+              <label>Description</label>
+              <input type="text" class="form-control" name="description" ng-model="form.description" required ng-minlength="3" placeholder="Enter a description">
+              <div ng-messages="myForm.description.$error" ng-if="myForm.description.$touched">
+                <p ng-message="minlength" class="control-label">Description must be at least 3 characters</p>
+                <p ng-message="required" class="control-label">Desription is required.</p>
+              </div>
+            </fieldset>
+            <fieldset class="form-group" ng-class="{'has-error': myForm.image.$invalid && myForm.image.$touched, 'has-success': myForm.image.$valid}">
+              <label>Image URL</label>
+              <input type="url" class="form-control" name="image" ng-model="form.image" required placeholder="Enter an image URL">
+              <div ng-messages="myForm.image.$error" ng-if="myForm.image.$touched">
+                <p ng-message="required" class="control-label">An image URL is required.</p>
+                <p ng-message="url" class="control-label">A valid image URL is required.</p>
+              </div>
+            </fieldset>
+            <fieldset class="form-group" ng-class="{'has-error': myForm.author.$invalid && myForm.author.$touched, 'has-success': myForm.author.$valid}">
+              <label>Author</label>
+              <input type="text" class="form-control" name="author" ng-model="form.author" required ng-minlength="2" placeholder="Enter an author">
+              <div ng-messages="myForm.author.$error" ng-if="myForm.author.$touched">
+                <p ng-message="minlength" class="control-label">Author name must be at least 2 characters.</p>
+                <p ng-message="required" class="control-label">Author name is required.</p>
+              </div>
+            </fieldset>
+            <div class="modal-footer">
+              <button type="button" class="btn cancel-button" data-dismiss="modal" ng-click="formClose()">Close</button>
+              <button type="submit" class="btn submit-button" data-toggle="modal" data-target="#myModal" ng-disabled="myForm.$invalid">Save Post</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="container-fluid col-md-12">
+    <section ng-init="vm.sort = '-votes'" ng-repeat="datum in data | orderBy : vm.sort | filter : search" class='col-md-10 col-md-offset-1'>
+      <article class='post jumbotron row'>
+        <h4>{{datum.title}} | <span ng-click="upVote(datum)" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span ng-class="{posVotes: datum.votes > 0, negVotes: datum.votes < 0 }"ng-bind="datum.votes"></span><span ng-click="downVote(datum)" class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></h4>
+
+        <div class="thumbnail col-md-3">
+          <a ng-href={{datum.image}} target='blank'><img ng-src={{datum.image}} alt=""></a>
+        </div>
+        <div class="col-md-9">
+          <h5>Posted by: {{datum.author}}</h5>
+          <p>{{datum.description}}</p>
+
+          <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"> </span> <timeless time="datum.date"></timeless> | <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Comments ({{datum.comments.length}}) | <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Add a comment</p>
+          </div>
+      </article>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,83 @@
+.navbar {
+  background: rgb(236, 237, 252);
+
+}
+
+nav button {
+  background: white;
+}
+
+nav .dropdown-menu li {
+  cursor: pointer;
+}
+
+.modal-header {
+  background: purple;
+  color: white
+}
+
+.submit-button {
+  background: purple;
+  color: white;
+}
+
+.submit-button:hover {
+  background: rgb(152, 110, 159);
+  color: white;
+}
+
+.cancel-button {
+  color: white;
+}
+
+.cancel-button:hover {
+  background: rgb(223, 228, 224);
+  color: white;
+}
+
+
+main {
+  margin-top: 80px;
+}
+
+.post img {
+  width: auto;
+}
+
+.posVotes {
+  color: green
+}
+
+.negVotes {
+  color: red;
+}
+.post p {
+  font-size: 1em;
+}
+
+.jumbotron {
+  background-color: rgb(236, 237, 252);
+  padding: 20px;
+}
+
+.glyphicon {
+  font-size: 1.1em;
+  color: purple;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+}
+
+.glyphicon:hover {
+  cursor: pointer;
+}
+
+.glyphicon-arrow-up:active {
+  color: green;
+}
+
+.glyphicon-arrow-down:active {
+  color: red;
+}
