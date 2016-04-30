@@ -2,6 +2,7 @@
 <html lang="en" ng-app="redditClone">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -17,9 +18,10 @@
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
   <script src="app.js" charset="utf-8"></script>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="animate.css">
   <title>Faux-Reddit</title>
 </head>
-<body ng-controller='MainController'>
+<body ng-controller='MainController' ng-cloak>
 
   <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -156,7 +158,7 @@
             <ng-pluralize count="datum.comments.length" when="{'1': 'Comment', 'other': 'Comments'}"> </ng-pluralize>
             ({{datum.comments.length}}) | <span class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="modal" data-target=".comment-modal" ng-click="makeAComment(datum)"></span> Add a comment</p>
 
-            <div ng-repeat="comment in datum.comments" ng-show="datum.showComments">
+            <div class="comments" ng-repeat="comment in datum.comments" ng-show="datum.showComments">
               <p><strong><span ng-bind="comment.commentAuthor"></span></strong>: <span ng-bind="comment.commentBody"></span></p>
             </div>
           </div>

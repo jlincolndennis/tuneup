@@ -81,3 +81,32 @@ main {
 .glyphicon-arrow-down:active {
   color: red;
 }
+
+
+.ng-move {
+  animation: slideInUp .3s;
+}
+
+.ng-move-stagger {
+  animation-delay: .1s
+}
+
+.ng-hide-remove {
+  animation: fadeIn .6s;
+}
+
+.ng-hide-remove-stagger {
+  animation-delay: .2s
+}
+
+.ng-hide-add {
+  animation: fadeOut .3s;
+}
+
+.ng-enter:not(.comments) {
+  animation: rollIn .4s;
+}
+
+.ng-leave {
+  animation: rollOut .4s;
+}

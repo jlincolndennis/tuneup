@@ -162,8 +162,6 @@ $scope.makeAComment = function (post) {
 }
 
 $scope.commentFormSubmit = function () {
-  console.log("111111111111111", $scope.activePost);
-
   $scope.activePost.comments.push($scope.comment);
   $scope.comment = {};
   $scope.commentForm.$setUntouched();
