@@ -2,7 +2,8 @@
   'use strict';
 
   var dependencies = [
-
+    'ui.router',
+    'app.posts'
   ];
 
   angular.module('app', dependencies)
@@ -19,7 +20,7 @@
       $stateProvider
         .state('app', {
           url: "/",
-          template: "<app></app>"
+          template: "<faux-reddit></faux-reddit>"
         });
     }
 })();
