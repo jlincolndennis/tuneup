@@ -25,8 +25,11 @@
         vm.commentFormSubmit = commentFormSubmit;
         vm.passActivePost = passActivePost;
         vm.commentFormClose = commentFormClose;
+        vm.search = postsService.search;
+        vm.sort = postsService.sort;
 
         function voteUp(post) {
+          console.log('in post dir', vm.sort);
           post.votes++;
         }
 

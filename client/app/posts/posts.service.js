@@ -116,7 +116,10 @@
       return {
         getPosts: getPosts,
         setActivePost: setActivePost,
-        submitComment: submitComment
+        submitComment: submitComment,
+        submitPost: submitPost,
+        search: {query: ""},
+        sort: {criteria: '-date'}
       }
 
       function getPosts() {
@@ -132,7 +135,17 @@
         _activePost.comments.push(comment);
         _activePost = {}
         return
-
       }
+
+      function submitPost(post) {
+        post.votes = 0;
+        post.comments = [];
+        post.show = false;
+        post.date = new Date();
+        _posts.push(post)
+        return
+      }
+
+
     }
 }());

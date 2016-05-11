@@ -19,15 +19,15 @@
         <li><button type="button" class="btn navbar-btn" data-toggle="modal" data-target="#postCreate"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Submit a Post</button></li>
         <form class="navbar-form navbar-left" role="search">
           <div class="form-group">
-            <input type="text" class="form-control" ng-model='search' placeholder="Search">
+            <input type="text" class="form-control" ng-model='vm.search.query' placeholder="Search">
           </div>
         </form>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort by... <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a ng-click="changeSorting('-votes')">Most Votes</a></li>
-            <li><a ng-click="changeSorting('title')">Alphabetically</a></li>
-            <li><a ng-click="changeSorting('-date')">Newest</a></li>
+            <li><a ng-click="vm.changeSortCriteria('-votes')">Most Votes</a></li>
+            <li><a ng-click="vm.changeSortCriteria('title')">Alphabetically</a></li>
+            <li><a ng-click="vm.changeSortCriteria('-date')">Newest</a></li>
           </ul>
         </li>
       </ul>
@@ -44,41 +44,41 @@
         <h4 class="modal-title" id="postCreatelLabel">Submit a Post</h4>
       </div>
       <div class="modal-body">
-        <form name="myForm" novalidate ng-submit="formSubmit()">
-          <fieldset class="form-group" ng-class="{'has-error': myForm.title.$invalid && myForm.title.$touched, 'has-success': myForm.title.$valid}">
+        <form name="postForm" novalidate ng-submit="vm.postFormSubmit(postForm)">
+          <fieldset class="form-group" ng-class="{'has-error': postForm.title.$invalid && postForm.title.$touched, 'has-success': postForm.title.$valid}">
             <label class="control-label">Title</label>
-            <input type="text" class="form-control" name="title" ng-model="form.title" required placeholder="Enter a title">
-            <div ng-messages="myForm.title.$error" ng-if="myForm.title.$touched">
+            <input type="text" class="form-control" name="title" ng-model="vm.post.title" required placeholder="Enter a title">
+            <div ng-messages="postForm.title.$error" ng-if="postForm.title.$touched">
               <p ng-message="required" class="control-label">Title is required.</p>
             </div>
           </fieldset>
-          <fieldset class="form-group" ng-class="{'has-error': myForm.description.$invalid && myForm.description.$touched, 'has-success': myForm.description.$valid}">
+          <fieldset class="form-group" ng-class="{'has-error': postForm.description.$invalid && postForm.description.$touched, 'has-success': postForm.description.$valid}">
             <label class="control-label">Description</label>
-            <input type="text" class="form-control" name="description" ng-model="form.description" required ng-minlength="3" placeholder="Enter a description">
-            <div ng-messages="myForm.description.$error" ng-if="myForm.description.$touched">
+            <input type="text" class="form-control" name="description" ng-model="vm.post.description" required ng-minlength="3" placeholder="Enter a description">
+            <div ng-messages="postForm.description.$error" ng-if="postForm.description.$touched">
               <p ng-message="minlength" class="control-label">Description must be at least 3 characters</p>
               <p ng-message="required" class="control-label">Desription is required.</p>
             </div>
           </fieldset>
-          <fieldset class="form-group" ng-class="{'has-error': myForm.image.$invalid && myForm.image.$touched, 'has-success': myForm.image.$valid}">
+          <fieldset class="form-group" ng-class="{'has-error': postForm.image.$invalid && postForm.image.$touched, 'has-success': postForm.image.$valid}">
             <label class="control-label">Image URL</label>
-            <input type="url" class="form-control" name="image" ng-model="form.image" required placeholder="Enter an image URL">
-            <div ng-messages="myForm.image.$error" ng-if="myForm.image.$touched">
+            <input type="url" class="form-control" name="image" ng-model="vm.post.image" required placeholder="Enter an image URL">
+            <div ng-messages="postForm.image.$error" ng-if="postForm.image.$touched">
               <p ng-message="required" class="control-label">An image URL is required.</p>
               <p ng-message="url" class="control-label">A valid image URL is required.</p>
             </div>
           </fieldset>
-          <fieldset class="form-group" ng-class="{'has-error': myForm.author.$invalid && myForm.author.$touched, 'has-success': myForm.author.$valid}">
+          <fieldset class="form-group" ng-class="{'has-error': postForm.author.$invalid && postForm.author.$touched, 'has-success': postForm.author.$valid}">
             <label class="control-label">Author</label>
-            <input type="text" class="form-control" name="author" ng-model="form.author" required ng-minlength="2" placeholder="Enter an author">
-            <div ng-messages="myForm.author.$error" ng-if="myForm.author.$touched">
+            <input type="text" class="form-control" name="author" ng-model="vm.post.author" required ng-minlength="2" placeholder="Enter an author">
+            <div ng-messages="postForm.author.$error" ng-if="postForm.author.$touched">
               <p ng-message="minlength" class="control-label">Author name must be at least 2 characters.</p>
               <p ng-message="required" class="control-label">Author name is required.</p>
             </div>
           </fieldset>
           <div class="modal-footer">
-            <button type="button" class="btn cancel-button" data-dismiss="modal" ng-click="formClose()">Close</button>
-            <button type="submit" class="btn submit-button" data-toggle="modal" data-target="#postCreate" ng-disabled="myForm.$invalid">Submit Post</button>
+            <button type="button" class="btn cancel-button" data-dismiss="modal" ng-click="vm.postFormClose(postForm)">Close</button>
+            <button type="submit" class="btn submit-button" data-toggle="modal" data-target="#postCreate" ng-disabled="postForm.$invalid">Submit Post</button>
           </div>
         </form>
       </div>
