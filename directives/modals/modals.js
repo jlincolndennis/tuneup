@@ -1,8 +1,11 @@
-angular.module('redditClone').directive('modals', function (postsService){
+angular.module('redditClone').directive('modals',['postsService', function (postsService){
   return {
     restrict: 'E',
     templateUrl: '/directives/modals/modals.html',
+    // scope: {},
     link: function (scope, element, attr, fn) {
+      scope.posts = postsService.getPosts();
+
       scope.formSubmit = function () {
         var newPost = angular.copy(scope.form);
         scope.form = {};
@@ -16,18 +19,16 @@ angular.module('redditClone').directive('modals', function (postsService){
         scope.myForm.$setPristine();
       }
 
-      scope.makeAComment = function(post) {
-        scope.activePost = post;
-      }
+
       scope.commentFormSubmit = function () {
         scope.activePost.comments.push(scope.comment);
         scope.comment = {};
         scope.commentForm.$setUntouched();
       }
 
-      $scope.commentFormClose = function () {
-        $scope.comment = {};
-        $scope.commentForm.$setUntouched();
+      scope.commentFormClose = function () {
+        scope.comment = {};
+        scope.commentForm.$setUntouched();
       }
 
 
@@ -35,4 +36,4 @@ angular.module('redditClone').directive('modals', function (postsService){
 
     }
   }
-})
+}])

@@ -15,6 +15,11 @@ angular.module('redditClone').directive('posts', function (){
         scope.revealComments = function (post) {
           post.showComments = !post.showComments
         }
+
+        scope.makeAComment = function(post) {
+          console.log("passed in post", post);
+          scope.activePost = post;
+        }
     }
   }
 })

@@ -17,14 +17,15 @@
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
 
-  <script src="modules/module.js"></script>
+  <script src="app.js"></script>
+  <script src="main.controller.js"></script>
   <script src="directives/header/header.js"></script>
   <script src="directives/modals/modals.js"></script>
   <script src="directives/posts/posts.js"></script>
   <script src="directives/comments/comments.js"></script>
   <script src="directives/timeless.js"></script>
   <script src="services/posts.service.js"></script>
-  <script src="app.js"></script>
+  
 
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="animate.css">
@@ -34,7 +35,7 @@
 
   <header-nav></header-nav>
 
-  <modals></modals>
+  <modals monkey="activePost"></modals>
 
   <posts />
 

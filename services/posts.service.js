@@ -110,7 +110,10 @@ angular.module('redditClone').factory('postsService',function() {
        showComments: false,
        comments: []
      }
-   ]
+   ],
+   getPosts: function(){
+     return this.posts;
+   }
   }
   return postsService;
 });
