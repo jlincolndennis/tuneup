@@ -3,6 +3,8 @@
 
   var dependencies = [
     'ui.router',
+    'ngAnimate',
+    'ngMessages',
     'app.posts'
   ];
 

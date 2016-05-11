@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.posts')
-    .directive('posts', postsDirective);
+    .directive('frPosts', postsDirective);
 
       function postsDirective() {
         return {
@@ -14,14 +14,48 @@
         }
       }
 
-      postsController.$inject = ['$log']
+      postsController.$inject = ['$log', 'postsService']
 
-      function postsController($log) {
+      function postsController($log, postsService) {
         var vm = this;
-        vm.logPost = logPost;
+        vm.posts = postsService.getPosts()
+        vm.upVote = voteUp;
+        vm.downVote = voteDown;
+        vm.showComments = showComments;
+        vm.commentFormSubmit = commentFormSubmit;
+        vm.passActivePost = passActivePost;
+        vm.commentFormClose = commentFormClose;
 
-        function logPost() {
-          $log.info('POST##########')
+        function voteUp(post) {
+          post.votes++;
         }
+
+        function voteDown(post) {
+          post.votes--;
+        }
+
+        function showComments(post) {
+          post.commentShow = !post.commentShow
+        }
+
+        function commentFormSubmit(form) {
+          var newComment = angular.copy(vm.comment);
+          postsService.submitComment(newComment);
+          vm.comment = null;
+          //will not work until ngMessages is set up!
+          form.$setPristine();
+          form.$setUntouched();
+        }
+
+        function passActivePost(post) {
+          postsService.setActivePost(post);
+        }
+
+        function commentFormClose(form) {
+          vm.comment = null;
+          form.$setPristine();
+          form.$setUntouched();
+        }
+
       }
 }());

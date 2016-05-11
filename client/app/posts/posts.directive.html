@@ -1,4 +1,59 @@
-<h5>Posts Template URL</h5>
-<h6>Should Say Nine: {{4+5}}</h6>
+<main class="container-fluid col-md-12">
+  <section ng-init="vm.sort = '-votes'" ng-repeat="post in vm.posts | orderBy : vm.sort | filter : search" class='col-md-10 col-md-offset-1'>
+    <article class='post jumbotron row'>
+      <h4>{{post.title}} | <span ng-click="vm.upVote(post)" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span ng-class="{posVotes: post.votes > 0, negVotes: post.votes < 0 }"ng-bind="post.votes"></span><span ng-click="vm.downVote(post)" class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></h4>
 
-<button ng-click="vm.logPost()">Log From Post</button>
+      <div class="thumbnail col-md-3">
+        <a ng-href={{post.image}} target='blank'><img ng-src={{post.image}} alt=""></a>
+      </div>
+      <div class="col-md-9">
+        <h5>Posted by: {{post.author}}</h5>
+        <p>{{post.description}}</p>
+
+        <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"> </span> <timeless time="post.date"></timeless> | <span ng-click="vm.showComments(post)" class="glyphicon glyphicon-comment" aria-hidden="true"></span> View
+          <ng-pluralize count="post.comments.length" when="{'1': 'Comment', 'other': 'Comments'}"> </ng-pluralize>
+          ({{post.comments.length}}) | <span class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="modal" data-target=".comment-modal" ng-click="vm.passActivePost(post)"></span> Add a comment</p>
+
+          <div class="comments" ng-repeat="comment in post.comments" ng-show="post.commentShow">
+            <p><strong><span ng-bind="comment.commentAuthor"></span></strong>: <span ng-bind="comment.commentBody"></span></p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- Comment Form Modal -->
+    <div class="modal fade comment-modal" tabindex="-1" role="dialog" aria-labelledby="commentModalLabel">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="commentModalLabel">Make a Comment</h4>
+          </div>
+          <div class="modal-body">
+            <form name="commentForm" novalidate ng-submit="vm.commentFormSubmit(commentForm)">
+              <fieldset class="form-group" ng-class="{'has-error': commentForm.author.$invalid && commentForm.author.$touched, 'has-success': commentForm.author.$valid}">
+                <label class="control-label">Author</label>
+                <input type="text" class="form-control" name="author" ng-model="vm.comment.commentAuthor" required placeholder="Enter an Author">
+                <div ng-messages="commentForm.author.$error" ng-if="commentForm.author.$touched">
+                  <p ng-message="required" class="control-label">Author name is required.</p>
+                </div>
+              </fieldset>
+              <fieldset class="form-group" ng-class="{'has-error': commentForm.text.$invalid && commentForm.text.$touched, 'has-success': commentForm.text.$valid}">
+                <label class="control-label">Comment</label>
+                <textarea type="text" class="form-control" name="text" ng-model="vm.comment.commentBody" required placeholder="Enter a Comment"></textarea>
+                <div ng-messages="commentForm.text.$error" ng-if="commentForm.text.$touched">
+                  <p ng-message="required" class="control-label">Comment is required.</p>
+                </div>
+              </fieldset>
+
+            <div class="modal-footer">
+              <button type="button" class="btn cancel-button" data-dismiss="modal" ng-click="vm.commentFormClose(commentForm)">Close</button>
+              <button type="submit" class="btn submit-button" data-toggle="modal" data-target=".comment-modal" ng-disabled="commentForm.$invalid">Submit Comment</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
