@@ -19,5 +19,5 @@
       function appController($log) {
         var vm = this;
     }
-      }
+      
 }());

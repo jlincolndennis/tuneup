@@ -4,15 +4,15 @@
       <h4>{{post.title}} | <span ng-click="vm.upVote(post)" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span ng-class="{posVotes: post.votes > 0, negVotes: post.votes < 0 }"ng-bind="post.votes"></span><span ng-click="vm.downVote(post)" class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></h4>
 
       <div class="thumbnail col-md-3">
-        <a ng-href={{post.image}} target='blank'><img ng-src={{post.image}} alt=""></a>
+        <a ng-href={{post.image_url}} target='blank'><img ng-src={{post.image_url}} alt=""></a>
       </div>
       <div class="col-md-9">
-        <h5>Posted by: {{post.author}}</h5>
+        <h5>Posted by: {{post.user_id}}</h5>
         <p>{{post.description}}</p>
 
-        <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"> </span> <timeless time="post.date"></timeless> | <span ng-click="vm.showComments(post)" class="glyphicon glyphicon-comment" aria-hidden="true"></span> View
+        <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"> </span> {{post.created_at}} | <span ng-click="vm.showComments(post)" class="glyphicon glyphicon-comment" aria-hidden="true"></span> View
           <ng-pluralize count="post.comments.length" when="{'1': 'Comment', 'other': 'Comments'}"> </ng-pluralize>
-          ({{post.comments.length}}) | <span class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="modal" data-target=".comment-modal" ng-click="vm.passActivePost(post)"></span> Add a comment</p>
+          (NOPE) | <span class="glyphicon glyphicon-pencil" aria-hidden="true" data-toggle="modal" data-target=".comment-modal" ng-click="vm.passActivePost(post)"></span> Add a comment</p>
 
           <div class="comments" ng-repeat="comment in post.comments" ng-show="post.commentShow">
             <p><strong><span ng-bind="comment.commentAuthor"></span></strong>: <span ng-bind="comment.commentBody"></span></p>

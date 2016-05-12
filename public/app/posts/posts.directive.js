@@ -18,7 +18,6 @@
 
       function postsController($log, postsService) {
         var vm = this;
-        vm.posts = postsService.getPosts()
         vm.upVote = voteUp;
         vm.downVote = voteDown;
         vm.showComments = showComments;
@@ -27,6 +26,11 @@
         vm.commentFormClose = commentFormClose;
         vm.search = postsService.search;
         vm.sort = postsService.sort;
+
+        postsService.getPosts().then(function (posts) {
+          vm.posts = posts.data;
+          return
+        })
 
         function voteUp(post) {
           console.log('in post dir', vm.sort);
