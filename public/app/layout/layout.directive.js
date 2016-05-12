@@ -18,10 +18,6 @@
 
       function appController($log) {
         var vm = this;
-        vm.logLayout = logLayout;
-
-        function logLayout() {
-          $log.info('LAYOUT~~~~~~~~~')
-        }
+    }
       }
 }());
