@@ -8,20 +8,20 @@ exports.seed = function(knex, Promise) {
     knex('users').insert({
       email: 'bodaciousbud@example.com',
       username: 'bodaciousbud',
-      password: 'secret'
+      password: 'secret',
       salt: 12345
     }),
     knex('users').insert({
       email: 'lastlincoln@example.com',
       username: 'lastlincoln',
-      password: 'secret'
+      password: 'secret',
       salt: 12345
     }),
     knex('users').insert({
       email: 'jigglyjames@example.com',
       username: 'jigglyjames',
-      password: 'secret'
+      password: 'secret',
       salt: 12345
-    }),
+    })
   );
 };
