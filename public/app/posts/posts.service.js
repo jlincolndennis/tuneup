@@ -8,19 +8,23 @@
 
     function postFactory($http, $log) {
       var _activePost = {};
-
+      var _posts = [];
 
       return {
         getPosts: getPosts,
         setActivePost: setActivePost,
         // submitComment: submitComment,
-        // submitPost: submitPost,
+        submitPost: submitPost,
         search: {query: ""},
         sort: {criteria: '-date'}
       }
 
       function getPosts() {
-        return $http.get('/api/v1/posts');
+        return $http.get('/api/v1/posts')
+          .then(function(res){
+            _posts = res.data;
+            return _posts;
+          });
       }
 
       function setActivePost(post) {
@@ -36,11 +40,12 @@
 
       function submitPost(post) {
         post.votes = 0;
-        post.comments = [];
-        post.show = false;
-        post.date = new Date();
-        _posts.push(post)
-        return
+        post.user_id = 1
+        return $http.post('/api/v1/posts/add', post)
+          .then(function(newPost){
+            _posts.push(newPost.data);
+            return _posts;
+          })
       }
     }
 }());

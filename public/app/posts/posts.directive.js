@@ -28,9 +28,8 @@
         vm.sort = postsService.sort;
 
         postsService.getPosts().then(function (posts) {
-          vm.posts = posts.data;
-          return
-        })
+          return vm.posts = posts;
+        });
 
         function voteUp(post) {
           console.log('in post dir', vm.sort);

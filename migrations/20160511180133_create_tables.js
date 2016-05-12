@@ -14,7 +14,7 @@ exports.up = function(knex, Promise) {
       table.string('title');
       table.text('description');
       table.integer('votes');
-      table.string('image_url');
+      table.text('image_url');
       table.integer('user_id').references('users.user_id').onDelete('CASCADE').onUpdate('CASCADE');
       table.timestamp('created_at').notNullable().defaultTo(knex.raw('now()'));
     })

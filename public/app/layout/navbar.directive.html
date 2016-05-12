@@ -62,18 +62,10 @@
           </fieldset>
           <fieldset class="form-group" ng-class="{'has-error': postForm.image.$invalid && postForm.image.$touched, 'has-success': postForm.image.$valid}">
             <label class="control-label">Image URL</label>
-            <input type="url" class="form-control" name="image" ng-model="vm.post.image" required placeholder="Enter an image URL">
+            <input type="url" class="form-control" name="image" ng-model="vm.post.image_url" required placeholder="Enter an image URL">
             <div ng-messages="postForm.image.$error" ng-if="postForm.image.$touched">
               <p ng-message="required" class="control-label">An image URL is required.</p>
               <p ng-message="url" class="control-label">A valid image URL is required.</p>
-            </div>
-          </fieldset>
-          <fieldset class="form-group" ng-class="{'has-error': postForm.author.$invalid && postForm.author.$touched, 'has-success': postForm.author.$valid}">
-            <label class="control-label">Author</label>
-            <input type="text" class="form-control" name="author" ng-model="vm.post.author" required ng-minlength="2" placeholder="Enter an author">
-            <div ng-messages="postForm.author.$error" ng-if="postForm.author.$touched">
-              <p ng-message="minlength" class="control-label">Author name must be at least 2 characters.</p>
-              <p ng-message="required" class="control-label">Author name is required.</p>
             </div>
           </fieldset>
           <div class="modal-footer">

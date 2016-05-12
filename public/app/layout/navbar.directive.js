@@ -25,10 +25,12 @@
         vm.search = postsService.search;
 
         function postFormSubmit(form) {
-          $log.log(vm.post)
           var newPost = angular.copy(vm.post);
-          postsService.submitPost(newPost);
           formReset(form);
+          postsService.submitPost(newPost)
+            .then(function(res){
+              return res
+            });
           return
         }
 
