@@ -9,19 +9,16 @@ exports.seed = function(knex, Promise) {
       email: 'bodaciousbud@example.com',
       username: 'bodaciousbud',
       password: 'secret',
-      salt: 12345
     }),
     knex('users').insert({
       email: 'lastlincoln@example.com',
       username: 'lastlincoln',
       password: 'secret',
-      salt: 12345
     }),
     knex('users').insert({
       email: 'jigglyjames@example.com',
       username: 'jigglyjames',
       password: 'secret',
-      salt: 12345
     })
   );
 };

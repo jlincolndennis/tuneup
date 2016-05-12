@@ -7,7 +7,7 @@
         <a ng-href={{post.image_url}} target='blank'><img ng-src={{post.image_url}} alt=""></a>
       </div>
       <div class="col-md-9">
-        <h5>Posted by: {{post.user_id}}</h5>
+        <h5>Posted by: {{post.username}}</h5>
         <p>{{post.description}}</p>
 
         <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"> </span> {{post.created_at}} | <span ng-click="vm.showComments(post)" class="glyphicon glyphicon-comment" aria-hidden="true"></span> View
