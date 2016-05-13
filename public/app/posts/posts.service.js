@@ -15,6 +15,7 @@
         setActivePost: setActivePost,
         // submitComment: submitComment,
         submitPost: submitPost,
+        updateVote: updateVote,
         search: {query: ""},
         sort: {criteria: '-date'}
       }
@@ -48,6 +49,20 @@
             _posts.push(newPost.data);
             return _posts;
           })
+      }
+
+      function updateVote(post, direction) {
+        if (direction === 'up') {
+          return $http.post('/api/v1/posts/' + post.id + '/upvote', post)
+            .then(function (res) {
+              return res;
+            })
+        } else {
+          return $http.post('/api/v1/posts/' + post.id + '/downvote', post)
+            .then(function (res) {
+              return res;
+            })
+        }
       }
     }
 }());

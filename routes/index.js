@@ -18,6 +18,7 @@ router.get('/api/v1/posts', function(req, res, next) {
         image_url: item.image_url,
         votes: item.votes,
         username: item.username,
+        created_at: item.created_at,
         comments: []
       })
     })
@@ -40,12 +41,33 @@ router.get('/api/v1/posts', function(req, res, next) {
 
 });
 
+
+
 router.post('/api/v1/posts/add', function(req, res, next){
   knex('posts')
     .insert(req.body)
     .returning('*')
     .then(function(newPost){
       return res.json(newPost[0])
+    })
+})
+
+router.post('/api/v1/posts/:postId/upvote', function (req, res, next) {
+  knex('posts')
+    .where({post_id: req.params.postId})
+    .increment('votes', 1)
+    .returning("*")
+    .then(function (post) {
+      return res.json(post[0]);
+    })
+})
+router.post('/api/v1/posts/:postId/downvote', function (req, res, next) {
+  knex('posts')
+    .where({post_id: req.params.postId})
+    .decrement('votes', 1)
+    .returning("*")
+    .then(function (post) {
+      return res.json(post[0]);
     })
 })
 

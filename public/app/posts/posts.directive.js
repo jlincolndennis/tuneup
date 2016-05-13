@@ -32,11 +32,12 @@
         });
 
         function voteUp(post) {
-          console.log('in post dir', vm.sort);
+          postsService.updateVote(post, 'up');
           post.votes++;
         }
 
         function voteDown(post) {
+          postsService.updateVote(post, 'down');
           post.votes--;
         }
 
