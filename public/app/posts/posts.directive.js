@@ -26,6 +26,7 @@
         vm.commentFormClose = commentFormClose;
         vm.search = postsService.search;
         vm.sort = postsService.sort;
+        vm.activePostId = '';
 
         postsService.getPosts().then(function (posts) {
           return vm.posts = posts;
@@ -47,15 +48,19 @@
 
         function commentFormSubmit(form) {
           var newComment = angular.copy(vm.comment);
+          newComment.post_id = vm.activePostId;
+          // until resolves set up
+          newComment.user_id = 3
           postsService.submitComment(newComment);
           vm.comment = null;
-          //will not work until ngMessages is set up!
+          vm.activePostId = null;
           form.$setPristine();
           form.$setUntouched();
         }
 
         function passActivePost(post) {
-          postsService.setActivePost(post);
+          vm.activePostId = post.id;
+          return
         }
 
         function commentFormClose(form) {

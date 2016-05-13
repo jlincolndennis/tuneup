@@ -32,16 +32,9 @@
           </div>
           <div class="modal-body">
             <form name="commentForm" novalidate ng-submit="vm.commentFormSubmit(commentForm)">
-              <fieldset class="form-group" ng-class="{'has-error': commentForm.author.$invalid && commentForm.author.$touched, 'has-success': commentForm.author.$valid}">
-                <label class="control-label">Author</label>
-                <input type="text" class="form-control" name="author" ng-model="vm.comment.commentAuthor" required placeholder="Enter an Author">
-                <div ng-messages="commentForm.author.$error" ng-if="commentForm.author.$touched">
-                  <p ng-message="required" class="control-label">Author name is required.</p>
-                </div>
-              </fieldset>
               <fieldset class="form-group" ng-class="{'has-error': commentForm.text.$invalid && commentForm.text.$touched, 'has-success': commentForm.text.$valid}">
                 <label class="control-label">Comment</label>
-                <textarea type="text" class="form-control" name="text" ng-model="vm.comment.commentBody" required placeholder="Enter a Comment"></textarea>
+                <textarea type="text" class="form-control" name="text" ng-model="vm.comment.comment" required placeholder="Enter a Comment"></textarea>
                 <div ng-messages="commentForm.text.$error" ng-if="commentForm.text.$touched">
                   <p ng-message="required" class="control-label">Comment is required.</p>
                 </div>
