@@ -43,6 +43,8 @@
         post.user_id = 1
         return $http.post('/api/v1/posts/add', post)
           .then(function(newPost){
+            newPost.data.username = "bodaciousbud";
+            newPost.data.comments = [];
             _posts.push(newPost.data);
             return _posts;
           })
