@@ -22,15 +22,23 @@
       $stateProvider
         .state('app', {
           abstract: true,
-          template: "<faux-reddit></faux-reddit>"
+          template: "<faux-reddit></faux-reddit>",
+          // url: "/"
         })
-        .state('app.posts',{
+        .state('posts',{
           template: "<fr-posts></fr-posts>",
+          parent: 'app',
           url: "/"
         })
-        .state('app.account',{
+        .state('login',{
           template: "<fr-account></fr-account>",
+          parent: 'app',
           url: "/login"
+        })
+        .state('signup',{
+          template: "<fr-account></fr-account>",
+          parent: 'app',
+          url: "/signup"
         })
     }
 })();
