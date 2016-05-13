@@ -20,6 +20,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 
+app.all('/*', function(req, res, next) {
+   // Just send the index.html for other files to support HTML5Mode
+   res.sendFile('index.html', { root: __dirname });
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

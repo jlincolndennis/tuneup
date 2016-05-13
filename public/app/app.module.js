@@ -21,8 +21,16 @@
 
       $stateProvider
         .state('app', {
-          url: "/",
+          abstract: true,
           template: "<faux-reddit></faux-reddit>"
-        });
+        })
+        .state('app.posts',{
+          template: "<fr-posts></fr-posts>",
+          url: "/"
+        })
+        .state('app.account',{
+          template: "<fr-account></fr-account>",
+          url: "/login"
+        })
     }
 })();

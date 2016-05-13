@@ -80,8 +80,8 @@ router.post('/api/v1/posts/:postId/comments/add', function(req, res, next) {
   })
 });
 
-router.get('*', function(req, res, next){
-  res.sendfile('index.html');
-})
+// router.get('*', function(req, res, next){
+//   res.sendfile('index.html');
+// })
 
 module.exports = router;
