@@ -1,6 +1,9 @@
 body {
   /*background-color: rgb(77, 77, 77);*/
 }
+.account-portal {
+  margin-top: 100px
+}
 
 .navbar {
   background: rgb(236, 237, 252);
@@ -91,7 +94,7 @@ main {
 }
 
 .ng-move {
-  animation: slideInUp .3s;
+  animation: fadeIn .3s;
 }
 
 .ng-move-stagger {
@@ -99,7 +102,7 @@ main {
 }
 
 .ng-hide-remove {
-  animation: fadeIn .6s;
+  animation: fadeIn .3s;
 }
 
 .ng-hide-remove-stagger {
@@ -111,9 +114,5 @@ main {
 }
 
 .ng-enter:not(.comments) {
-  animation: rollIn .4s;
-}
-
-.ng-leave {
-  animation: rollOut .4s;
+  animation: fadeIn .3s;
 }
