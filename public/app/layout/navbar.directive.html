@@ -33,9 +33,9 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
       <li><a> Hello, {{vm.activeUser.username}}</a></li>
-     <li><a ui-sref="login">Log In</a></li>
-     <li><a ui-sref="signup">Sign Up</a></li>
-     <li><a ui-sref="login" ng-click="vm.logOut()">Log Out</a></li>
+      <li ng-hide="vm.activeUser.user_id"><a ui-sref="login">Log In</a></li>
+      <li ng-hide="vm.activeUser.user_id"><a ui-sref="signup">Sign Up</a></li>
+      <li ng-show="vm.activeUser.user_id"><a ui-sref="login" ui-sref-opts="{reload:true}" ng-click="vm.logOut()">Log Out</a></li>
    </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

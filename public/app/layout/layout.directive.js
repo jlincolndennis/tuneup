@@ -7,7 +7,9 @@
       function appDirective() {
         return {
           restrict: 'E',
-          scope: {},
+          scope: {
+            current: '='
+          },
           templateUrl: '/app/layout/layout.directive.html',
           controller: appController,
           controllerAs: "vm"
@@ -19,5 +21,5 @@
       function appController($log) {
         var vm = this;
     }
-      
+
 }());

@@ -7,7 +7,9 @@
       function navDirective() {
         return {
           restrict: 'E',
-          scope: {},
+          scope: {
+            current: "="
+          },
           templateUrl: '/app/layout/navbar.directive.html',
           controller: navController,
           controllerAs: "vm"
@@ -24,7 +26,13 @@
         vm.changeSortCriteria = changeSortCriteria;
         vm.search = postsService.search;
         vm.logOut = logOut;
-        vm.activeUser = activeUserService.getActiveUser();
+
+        activeUserService.getActiveUser()
+          .then(function (user) {
+            vm.activeUser = user
+            console.log('in navController', vm.activeUser);
+            return vm.activeUser
+          })
 
         function postFormSubmit(form) {
           var newPost = angular.copy(vm.post);
@@ -45,7 +53,6 @@
           postsService.sort.criteria = criteria;
           console.log('after', postsService.sort);
           return
-
         }
 
         function logOut(){

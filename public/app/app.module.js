@@ -23,7 +23,9 @@
         .state('app', {
           abstract: true,
           template: "<faux-reddit></faux-reddit>",
-          // url: "/"
+          // resolve: {
+          //   currentUserResolve: currentUserResolve
+          // },
         })
         .state('posts',{
           template: "<fr-posts current='current'></fr-posts>",
@@ -32,30 +34,32 @@
           resolve: {
             currentUserResolve: currentUserResolve
           },
-          controller: function($scope, currentUserResolve){
-            $scope.current = currentUserResolve;
-            console.log('in extra controller', currentUserResolve);
-          },
+          // controller: function($scope, currentUserResolve){
+          //   $scope.current = currentUserResolve;
+          //   console.log('in extra controller', currentUserResolve);
+          // },
+
         })
         .state('login',{
           template: "<fr-account></fr-account>",
           parent: 'app',
           url: "/login",
-          // resolve: {
-          //   currentUserResolve: currentUserResolve
-          //   }
+          resolve: {
+            currentUserResolve: currentUserResolve
+            }
         })
         .state('signup',{
           template: "<fr-account></fr-account>",
           parent: 'app',
           url: "/signup",
-          // resolve: {
-          //   currentUserResolve: currentUserResolve
-          //   }
+          resolve: {
+            currentUserResolve: currentUserResolve
+            }
         })
 
     }
     function currentUserResolve ($http, activeUserService) {
+      console.log('1 in the resolve function');
       if (localStorage.getItem('token')) {
         const config = {
           headers: {
@@ -64,13 +68,18 @@
         }
         return $http.get('/api/v1/users/me', config)
           .then(function (response) {
-            console.log('in app module', response.data);
+            console.log('2 in the resolve then', response.data);
             return activeUserService.setActiveUser(response.data)
           })
           .catch(function () {
+            console.log('in the resolve catch', response.data);
+            return activeUserService.setActiveUser(null)
             localStorage.clear();
             return null;
           })
+        } else {
+          console.log('in resolve else');
+          return activeUserService.setActiveUser(null)
         }
       }
 

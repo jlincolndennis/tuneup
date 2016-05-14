@@ -14,15 +14,20 @@ router.get('/me', function (req, res, next) {
      .first()
       .then(function (user) {
        if (user) {
+         console.log('in me route, all good', user);
+
          res.json({user_id: user.user_id, username: user.username})
        } else {
+         console.log('in me route, no id');
          res.status(403).json({
            error: "Invalid ID"
          })
        }
      })
    } else {
+     console.log('in me route, no token');
   res.status(403).json({
+
     error: "WHERE IS YOUR MOTHERFUCKING TOKEN??"
   })
 }
@@ -90,20 +95,25 @@ router.post('/login', function (req, res, next) {
     knex('users')
     .whereRaw('lower(email) = ?', req.body.email.toLowerCase())
     .first()
-    .then(function (user) {
-      console.log(user);
-      if (bcrypt.compareSync(req.body.password, user.password)) {
-        const token = jwt.sign({ user_id: user.user_id }, process.env.JWT_SECRET);
-        res.json({
-          user_id: user.id,
-          username: user.username,
-          email: user.email,
-          token: token
+    .then(function (user){
+      if(!user){
+        res.status(400).json({
+          errors: ['Invalid Email.']
         })
       } else {
-        res.status(400).json({
-          errors: ['Wrong Password!']
-        })
+        if(bcrypt.compareSync(req.body.password, user.password)) {
+          const token = jwt.sign({ user_id: user.user_id }, process.env.JWT_SECRET);
+          res.json({
+            user_id: user.id,
+            username: user.username,
+            email: user.email,
+            token: token
+          })
+        } else {
+          res.status(400).json({
+            errors: ['Wrong password.']
+          })
+        }
       }
 
     })

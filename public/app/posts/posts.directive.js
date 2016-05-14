@@ -32,7 +32,8 @@
         vm.deletePost = deletePost;
         vm.deleteComment = deleteComment;
 
-        postsService.getPosts().then(function (posts) {
+        postsService.getPosts()
+          .then(function (posts) {
           return vm.posts = posts;
         });
 

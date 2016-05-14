@@ -4,9 +4,9 @@
   angular.module('app')
     .factory('activeUserService', activeUserFactory);
 
-    activeUserFactory.$inject = ['$log'];
+    activeUserFactory.$inject = ['$log', '$q'];
 
-    function activeUserFactory ($log) {
+    function activeUserFactory ($log, $q) {
       var _user = {};
 
       return {
@@ -15,12 +15,17 @@
       }
 
      function setActiveUser (user){
-       _user = user;
-       return
+       console.log('3 in setActiveUser', user);
+       return  _user = user;
+
      }
 
      function getActiveUser (){
-       return _user;
+       return $q(function (resolve, reject) {
+           console.log('in activeUserService resolve' ,_user)
+           resolve( _user)
+
+       })
      }
 
   }
