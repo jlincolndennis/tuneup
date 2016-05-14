@@ -36,8 +36,9 @@
 
     }
     function logOut (){
+      console.log('log out in service');
+      // $state.go('login');
       $window.localStorage.clear();
-      $state.go('posts');
     }
   }
 

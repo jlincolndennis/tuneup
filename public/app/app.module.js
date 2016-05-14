@@ -5,7 +5,7 @@
     'ui.router',
     'ngAnimate',
     'ngMessages',
-    'app.posts'
+    'app.posts',
   ];
 
   angular.module('app', dependencies)
@@ -13,7 +13,7 @@
 
     setupRoutes.$inject = ['$stateProvider',
                           '$urlRouterProvider',
-                          '$locationProvider'];
+                          '$locationProvider', ];
 
     function setupRoutes($stateProvider, $urlRouterProvider, $locationProvider){
       $locationProvider.html5Mode(true);
@@ -26,19 +26,53 @@
           // url: "/"
         })
         .state('posts',{
-          template: "<fr-posts></fr-posts>",
+          template: "<fr-posts current='current'></fr-posts>",
           parent: 'app',
-          url: "/"
+          url: "/",
+          resolve: {
+            currentUserResolve: currentUserResolve
+          },
+          controller: function($scope, currentUserResolve){
+            $scope.current = currentUserResolve;
+            console.log('in extra controller', currentUserResolve);
+          },
         })
         .state('login',{
           template: "<fr-account></fr-account>",
           parent: 'app',
-          url: "/login"
+          url: "/login",
+          // resolve: {
+          //   currentUserResolve: currentUserResolve
+          //   }
         })
         .state('signup',{
           template: "<fr-account></fr-account>",
           parent: 'app',
-          url: "/signup"
+          url: "/signup",
+          // resolve: {
+          //   currentUserResolve: currentUserResolve
+          //   }
         })
+
     }
+    function currentUserResolve ($http, activeUserService) {
+      if (localStorage.getItem('token')) {
+        const config = {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          }
+        }
+        return $http.get('/api/v1/users/me', config)
+          .then(function (response) {
+            console.log('in app module', response.data);
+            return activeUserService.setActiveUser(response.data)
+          })
+          .catch(function () {
+            localStorage.clear();
+            return null;
+          })
+        }
+      }
+
+
 })();

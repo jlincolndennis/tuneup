@@ -1,4 +1,6 @@
+
 <main class="container-fluid col-md-12">
+  <h1>Hello, {{current.username}}</h1>
   <section ng-repeat="post in vm.posts | orderBy : vm.sort.criteria | filter : vm.search.query" class='col-md-10 col-md-offset-1'>
     <article class='post jumbotron row'>
       <h4>{{post.title}} | <span ng-click="vm.upVote(post)" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span ng-class="{posVotes: post.votes > 0, negVotes: post.votes < 0 }"ng-bind="post.votes"></span><span ng-click="vm.downVote(post)" class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></h4>
