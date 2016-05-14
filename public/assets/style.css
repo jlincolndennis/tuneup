@@ -93,7 +93,7 @@ main {
   color: red;
 }
 
-.ng-move {
+/*.ng-move {
   animation: fadeIn .3s;
 }
 
@@ -115,4 +115,4 @@ main {
 
 .ng-enter:not(.comments) {
   animation: fadeIn .3s;
-}
+}*/
