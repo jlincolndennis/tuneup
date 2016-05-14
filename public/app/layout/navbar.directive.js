@@ -14,15 +14,16 @@
         }
       }
 
-      navController.$inject = ['$log', 'postsService']
+      navController.$inject = ['$log', 'postsService', 'accountService']
 
-      function navController($log, postsService) {
+      function navController($log, postsService, accountService) {
         var vm = this;
         vm.post = {};
         vm.postFormSubmit = postFormSubmit;
         vm.postFormClose = postFormClose;
         vm.changeSortCriteria = changeSortCriteria;
         vm.search = postsService.search;
+        vm.logOut = logOut;
 
         function postFormSubmit(form) {
           var newPost = angular.copy(vm.post);
@@ -44,6 +45,10 @@
           console.log('after', postsService.sort);
           return
 
+        }
+
+        function logOut(){
+          accountService.logOut();
         }
 
         function formReset(form) {

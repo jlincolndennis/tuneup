@@ -27,6 +27,8 @@
         vm.search = postsService.search;
         vm.sort = postsService.sort;
         vm.activePostId = '';
+        vm.deletePost = deletePost;
+        vm.deleteComment = deleteComment;
 
         postsService.getPosts().then(function (posts) {
           return vm.posts = posts;
@@ -34,12 +36,12 @@
 
         function voteUp(post) {
           postsService.updateVote(post, 'up');
-          post.votes++;
+          return
         }
 
         function voteDown(post) {
           postsService.updateVote(post, 'down');
-          post.votes--;
+          return
         }
 
         function showComments(post) {
@@ -59,7 +61,7 @@
         }
 
         function passActivePost(post) {
-          vm.activePostId = post.id;
+          vm.activePostId = post.post_id;
           return
         }
 
@@ -67,6 +69,19 @@
           vm.comment = null;
           form.$setPristine();
           form.$setUntouched();
+        }
+
+        function deletePost(post) {
+          postsService.deletePost(post);
+          return
+
+        }
+
+        function deleteComment(comment, post) {
+          postsService.deleteComment(comment);
+          post.show = false;
+          return
+
         }
 
       }

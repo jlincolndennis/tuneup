@@ -14,9 +14,22 @@
         }
       }
 
-      accountController.$inject = ['$log']
+      accountController.$inject = ['$log', 'accountService']
 
-      function accountController($log) {
+      function accountController($log, accountService) {
         var vm = this;
+        vm.signUpSubmit = signUpSubmit;
+        vm.logInSubmit = logInSubmit;
+
+        function signUpSubmit(form) {
+          var newUser = angular.copy(vm.newUser);
+          return accountService.createUser(newUser)
+        }
+
+        function logInSubmit(form) {
+          var user = angular.copy(vm.user);
+          return accountService.logIn(user)
+        }
       }
+
 }());

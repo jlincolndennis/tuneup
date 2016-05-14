@@ -5,7 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
+var posts = require('./routes/posts');
+var users = require('./routes/users');
 
 
 var app = express();
@@ -18,7 +19,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+
+app.use('/api/v1/posts', posts);
+app.use('/api/v1/users', users);
 
 app.all('/*', function(req, res, next) {
    // Just send the index.html for other files to support HTML5Mode

@@ -17,7 +17,9 @@
         submitPost: submitPost,
         updateVote: updateVote,
         search: {query: ""},
-        sort: {criteria: '-date'}
+        sort: {criteria: '-date'},
+        deletePost: deletePost,
+        deleteComment: deleteComment
       }
 
       function getPosts() {
@@ -34,9 +36,10 @@
                 // change after resolve is in place
                  comment.username = "jigglyjames";
                  comment.created_at = res.data.created_at;
+                 comment.comment_id = res.data.comment_id;
 
                  _posts.forEach(function (post){
-                   if (post.id === comment.post_id){
+                   if (post.post_id === comment.post_id){
                      post.comments.push(comment)
                    }
                  })
@@ -59,16 +62,51 @@
 
       function updateVote(post, direction) {
         if (direction === 'up') {
-          return $http.post('/api/v1/posts/' + post.id + '/upvote', post)
+          return $http.post('/api/v1/posts/' + post.post_id + '/upvote', post)
             .then(function (res) {
-              return res;
+              _posts.forEach(function (item) {
+                if (item.post_id === post.post_id) {
+                  item.votes++
+                }
+              })
+              return _posts;
             })
         } else {
-          return $http.post('/api/v1/posts/' + post.id + '/downvote', post)
+          return $http.post('/api/v1/posts/' + post.post_id + '/downvote', post)
             .then(function (res) {
-              return res;
+              _posts.forEach(function (item) {
+                if (item.post_id === post.post_id) {
+                  item.votes--
+                }
+              })
+              return _posts;
             })
         }
       }
+
+    function deletePost (post) {
+      return $http.delete('/api/v1/posts/' + post.post_id)
+      .then(function (res) {
+        var target = _posts.indexOf(post);
+        _posts.splice(target, 1);
+        return _posts;
+      })
+    }
+
+    function deleteComment (comment) {
+      console.log('in service, before call', comment);
+      return $http.delete('/api/v1/posts/comments/' + comment.comment_id)
+      .then(function (res){
+        console.log('res', res);
+        console.log('comment', comment);
+        _posts.forEach(function (item){
+          if (item.post_id === comment.post_id){
+            var target = item.comments.indexOf(comment);
+            item.comments.splice(target, 1)
+          }
+        })
+        return _posts
+      })
+    }
     }
 }());
