@@ -24,13 +24,15 @@
 
         function signUpSubmit(form) {
           var newUser = angular.copy(vm.newUser);
+          vm.newUser = {}
+          form.$setUntouched();
           return accountService.createUser(newUser)
         }
 
         function logInSubmit(form) {
           var user = angular.copy(vm.user);
           vm.user = {}
-          form.$setUntouched(); 
+          form.$setUntouched();
           return accountService.logIn(user)
         }
       }
