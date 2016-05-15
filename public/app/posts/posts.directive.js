@@ -31,6 +31,7 @@
         vm.activePostId = '';
         vm.deletePost = deletePost;
         vm.deleteComment = deleteComment;
+        vm.showDelete = showDelete;
 
         activeUserService.getActiveUser()
           .then(function (user) {
@@ -83,14 +84,21 @@
         function deletePost(post) {
           postsService.deletePost(post);
           return
-
         }
 
         function deleteComment(comment, post) {
           postsService.deleteComment(comment);
           post.show = false;
           return
+        }
 
+        function showDelete(article) {
+          if (!vm.activeUser) return false;
+          if (article.user_id === vm.activeUser.user_id) {
+            return true
+          } else {
+            return false
+          }
         }
 
       }
