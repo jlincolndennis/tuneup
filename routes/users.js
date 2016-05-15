@@ -25,10 +25,8 @@ router.get('/me', function (req, res, next) {
        }
      })
    } else {
-     console.log('in me route, no token');
-  res.status(403).json({
-
-    error: "WHERE IS YOUR MOTHERFUCKING TOKEN??"
+  res.status(200).json({
+    msg: "This is fine, I guess?"
   })
 }
 })
