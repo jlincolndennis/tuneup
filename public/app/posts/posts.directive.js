@@ -16,9 +16,9 @@
         }
       }
 
-      postsController.$inject = ['$log', 'postsService']
+      postsController.$inject = ['$log', 'postsService', 'activeUserService']
 
-      function postsController($log, postsService) {
+      function postsController($log, postsService, activeUserService) {
         var vm = this;
         vm.upVote = voteUp;
         vm.downVote = voteDown;
@@ -31,6 +31,12 @@
         vm.activePostId = '';
         vm.deletePost = deletePost;
         vm.deleteComment = deleteComment;
+
+        activeUserService.getActiveUser()
+          .then(function (user) {
+            vm.activeUser = user
+            return vm.activeUser
+          })
 
         postsService.getPosts()
           .then(function (posts) {
@@ -55,8 +61,8 @@
           var newComment = angular.copy(vm.comment);
           newComment.post_id = vm.activePostId;
           // until resolves set up
-          newComment.user_id = 3
-          postsService.submitComment(newComment);
+          newComment.user_id = vm.activeUser.user_id
+          postsService.submitComment(newComment, vm.activeUser.username);
           vm.comment = null;
           vm.activePostId = null;
           form.$setPristine();

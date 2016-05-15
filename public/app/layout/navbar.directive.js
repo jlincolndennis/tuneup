@@ -30,14 +30,14 @@
         activeUserService.getActiveUser()
           .then(function (user) {
             vm.activeUser = user
-            console.log('in navController', vm.activeUser);
             return vm.activeUser
           })
 
         function postFormSubmit(form) {
           var newPost = angular.copy(vm.post);
+          newPost.user_id = vm.activeUser.user_id;
           formReset(form);
-          postsService.submitPost(newPost)
+          postsService.submitPost(newPost, vm.activeUser.username)
             .then(function(res){
               return res
             });

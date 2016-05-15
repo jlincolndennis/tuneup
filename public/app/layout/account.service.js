@@ -24,6 +24,7 @@
       .then(function (res){
         $window.localStorage.setItem('token', res.data.token)
         $state.go('posts', {}, {reload:true});
+
       })
     }
 

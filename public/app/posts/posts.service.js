@@ -30,11 +30,11 @@
           });
       }
 
-      function submitComment(comment){
+      function submitComment(comment, name){
             return $http.post('/api/v1/posts/'+ comment.post_id +'/comments/add', comment)
               .then(function (res){
                 // change after resolve is in place
-                 comment.username = "jigglyjames";
+                 comment.username = name;
                  comment.created_at = res.data.created_at;
                  comment.comment_id = res.data.comment_id;
 
@@ -47,13 +47,11 @@
               })
           }
 
-      function submitPost(post) {
+      function submitPost(post, name) {
         post.votes = 0;
-        // until resolve is set up
-        post.user_id = 1
         return $http.post('/api/v1/posts/add', post)
           .then(function(newPost){
-            newPost.data.username = "bodaciousbud";
+            newPost.data.username = name;
             newPost.data.comments = [];
             _posts.push(newPost.data);
             return _posts;

@@ -25,7 +25,7 @@
           template: "<faux-reddit></faux-reddit>",
         })
         .state('posts',{
-          template: "<fr-posts current='current'></fr-posts>",
+          template: "<fr-posts></fr-posts>",
           parent: 'app',
           url: "/",
           resolve: {
