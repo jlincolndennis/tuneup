@@ -14,16 +14,22 @@
           <h2 class="text-center">Log In!</h2>
           <hr>
           <form name="logInForm" ng-submit="vm.logInSubmit(logInForn)">
-            <div class="form-group">
+            <fieldset class="form-group" ng-class="{'has-error': logInForm.email.$invalid && logInForm.email.$touched, 'has-success': logInForm.email.$valid}">
               <label for="email">Email:</label>
-              <input type="text" class="form-control" ng-model="vm.user.email" placeholder="Email">
-            </div>
-            <div class="form-group">
+              <input type="text" class="form-control" ng-model="vm.user.email" name="email" placeholder="Email" required>
+              <div ng-messages="logInForm.email.$error" ng-if="logInForm.email.$touched">
+                <p ng-message="required" class="control-label">Please enter your email.</p>
+              </div>
+            </fieldset>
+            <fieldset class="form-group" ng-class="{'has-error': logInForm.password.$invalid && logInForm.password.$touched, 'has-success': logInForm.password.$valid}">
               <label for="password">Password:</label>
-              <input type="password" class="form-control" ng-model="vm.user.password" placeholder="Password">
-            </div>
+              <input type="password" name="password" class="form-control" ng-model="vm.user.password" placeholder="Password" required>
+              <div ng-messages="logInForm.password.$error" ng-if="logInForm.password.$touched">
+                <p ng-message="required" class="control-label">Please enter a password.</p>
+              </div>
+            </fieldset>
 
-            <button type="submit" class="btn submit-button">Log In</button>
+            <button type="submit" ng-disabled="logInForm.$invalid" class="btn submit-button">Log In</button>
           </form>
         <br>
         <br>
@@ -33,21 +39,30 @@
           <p><em>If You <strong>Need</strong> An Account...</em></p>
           <h2 class="text-center">Sign Up!</h2>
           <hr>
-          <form name="signUpForm" ng-submit="vm.signUpSubmit(signUpForm)" >
-            <div class="form-group">
-              <label for="exampleInputEmail1">Enter a Valid Email Address:</label>
-              <input type="email" class="form-control" ng-model="vm.newUser.email" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputPassword1">Set a Password:</label>
-              <input type="password" class="form-control" ng-model="vm.newUser.password" placeholder="Password">
-            </div>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Choose a Username:</label>
-              <input type="text" class="form-control" ng-model="vm.newUser.username" placeholder="Username">
-            </div>
+          <form name="signUpForm" ng-submit="vm.signUpSubmit(signUpForm)">
+            <fieldset class="form-group" ng-class="{'has-error': signUpForm.username.$invalid && signUpForm.username.$touched, 'has-success': signUpForm.username.$valid}">
+              <label for="username">Choose a Username:</label>
+              <input type="text" name="username" class="form-control" ng-model="vm.newUser.username" placeholder="Username" required>
+              <div ng-messages="signUpForm.username.$error" ng-if="signUpForm.username.$touched">
+                <p ng-message="required" class="control-label">Please choose a username.</p>
+              </div>
+            </fieldset>
+            <fieldset class="form-group" ng-class="{'has-error': signUpForm.email.$invalid && signUpForm.email.$touched, 'has-success': signUpForm.email.$valid}">
+              <label for="email">Enter a Valid Email Address:</label>
+              <input type="email" name="email" class="form-control" ng-model="vm.newUser.email" placeholder="Email" required>
+              <div ng-messages="signUpForm.email.$error" ng-if="signUpForm.email.$touched">
+                <p ng-message="required" class="control-label">Please enter your email.</p>
+              </div>
+            </fieldset>
+            <fieldset class="form-group" ng-class="{'has-error': signUpForm.password.$invalid && signUpForm.password.$touched, 'has-success': signUpForm.password.$valid}">
+              <label for="password">Set a Password:</label>
+              <input type="password" name="password" class="form-control" ng-model="vm.newUser.password" placeholder="Password" required>
+              <div ng-messages="signUpForm.password.$error" ng-if="signUpForm.password.$touched">
+                <p ng-message="required" class="control-label">Please enter a password.</p>
+              </div>
+            </fieldset>
 
-            <button type="submit" class="btn submit-button">Sign Up</button>
+            <button type="submit" ng-disabled="signUpForm.$invalid" class="btn submit-button">Sign Up</button>
           </form>
           <br>
         </div>
