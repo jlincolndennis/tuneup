@@ -4,4 +4,8 @@
 
 ## _It Just Works! (TM)_
 
-Behold! My completed Reddit Clone Assignment! View it at your leisure [HERE](http://jlincolndennis.github.io/reddit_clone/)!
+Behold! My completed Reddit Clone Assignment! VERSION 3.0, DAWG!
+
+[View it at your leisure](https://faux-reddit.herokuapp.com/)!
+
+Codebase [HERE](http://jlincolndennis.github.io/reddit_clone/)!
