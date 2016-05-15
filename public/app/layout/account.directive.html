@@ -7,13 +7,16 @@
         <h4 class="modal-title text-center">Account Portal</h4>
       </div>
       <div class="row">
-
-      <div class="modal-body">
+        <div class="error text-center" ng-repeat="error in vm.errors">
+          <h4>{{error}}</h4>
+        </div>
+        <div class="modal-body">
         <div class="col-md-4 col-md-offset-1">
           <p><em>If You <strong>Have</strong> An Account...</em></p>
           <h2 class="text-center">Log In!</h2>
           <hr>
-          <form name="logInForm" ng-submit="vm.logInSubmit(logInForn)">
+
+          <form name="logInForm" ng-submit="vm.logInSubmit(logInForm)">
             <fieldset class="form-group" ng-class="{'has-error': logInForm.email.$invalid && logInForm.email.$touched, 'has-success': logInForm.email.$valid}">
               <label for="email">Email:</label>
               <input type="text" class="form-control" ng-model="vm.user.email" name="email" placeholder="Email" required>

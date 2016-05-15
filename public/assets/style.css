@@ -93,6 +93,9 @@ main {
   color: red;
 }
 
+.error {
+  color: rgb(171, 67, 63);
+}
 /*.ng-move {
   animation: fadeIn .3s;
 }

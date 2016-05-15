@@ -96,10 +96,12 @@ router.post('/login', function (req, res, next) {
     .then(function (user){
       if(!user){
         res.status(400).json({
-          errors: ['Invalid Email.']
+          errors: ['Invalid Login Credentials.']
         })
       } else {
+
         if(bcrypt.compareSync(req.body.password, user.password)) {
+          console.log('did it get here? IT SHOULD NOT HAVE!');
           const token = jwt.sign({ user_id: user.user_id }, process.env.JWT_SECRET);
           res.json({
             user_id: user.id,
@@ -109,7 +111,7 @@ router.post('/login', function (req, res, next) {
           })
         } else {
           res.status(400).json({
-            errors: ['Wrong password.']
+            errors: ['Invalid Login Credentials.']
           })
         }
       }

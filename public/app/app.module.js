@@ -16,6 +16,7 @@
 
         if(toState.publicOnly && localStorage.getItem('token')) {
           event.preventDefault();
+          console.log('Or was it this?');
           $state.go('posts')
         }
       });
@@ -24,17 +25,23 @@
     .factory('authInterceptor', function ($location) {
       return {
         request: function (config) {
-          if (localStorage.getItem('token')) {
-              config.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
-            }
-          return config
+          var token = localStorage.getItem('token')
+
+          if (token) {
+            config.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+            return config
+          } else {
+
+            return config
+          }
         },
         responseError: function (response) {
           if (response.status === 403){
             localStorage.removeItem('token');
+            console.log('Did this do it?');
           $location.path('/')
           }
-          console.log(response);
+          console.log('hmmmmmmm', response);
           return response
 
         }

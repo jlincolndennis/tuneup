@@ -20,6 +20,7 @@
         var vm = this;
         vm.signUpSubmit = signUpSubmit;
         vm.logInSubmit = logInSubmit;
+        vm.errors = accountService.getErrors();
 
         function signUpSubmit(form) {
           var newUser = angular.copy(vm.newUser);
@@ -28,6 +29,8 @@
 
         function logInSubmit(form) {
           var user = angular.copy(vm.user);
+          vm.user = {}
+          form.$setUntouched(); 
           return accountService.logIn(user)
         }
       }
