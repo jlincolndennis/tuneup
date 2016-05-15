@@ -33,7 +33,7 @@
       function submitComment(comment, name){
             return $http.post('/api/v1/posts/'+ comment.post_id +'/comments/add', comment)
               .then(function (res){
-                // change after resolve is in place
+                
                  comment.username = name;
                  comment.created_at = res.data.created_at;
                  comment.comment_id = res.data.comment_id;
@@ -92,11 +92,9 @@
     }
 
     function deleteComment (comment) {
-      console.log('in service, before call', comment);
+
       return $http.delete('/api/v1/posts/comments/' + comment.comment_id)
       .then(function (res){
-        console.log('res', res);
-        console.log('comment', comment);
         _posts.forEach(function (item){
           if (item.post_id === comment.post_id){
             var target = item.comments.indexOf(comment);

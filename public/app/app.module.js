@@ -9,13 +9,45 @@
   ];
 
   angular.module('app', dependencies)
-    .config(setupRoutes);
+    .config(setupRoutes)
+
+    .run(function ($rootScope, $state, $window, $location) {
+      $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
+
+        if(toState.publicOnly && localStorage.getItem('token')) {
+          event.preventDefault();
+          $state.go('posts')
+        }
+      });
+    })
+
+    .factory('authInterceptor', function ($location) {
+      return {
+        request: function (config) {
+          if (localStorage.getItem('token')) {
+              config.headers.Authorization = 'Bearer ' + localStorage.getItem('token');
+            }
+          return config
+        },
+        responseError: function (response) {
+          if (response.status === 403){
+            localStorage.removeItem('token');
+          $location.path('/')
+          }
+          console.log(response);
+          return response
+
+        }
+      }
+    })
 
     setupRoutes.$inject = ['$stateProvider',
                           '$urlRouterProvider',
-                          '$locationProvider', ];
+                          '$locationProvider',
+                          '$httpProvider'];
 
-    function setupRoutes($stateProvider, $urlRouterProvider, $locationProvider){
+    function setupRoutes($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider){
+      $httpProvider.interceptors.push('authInterceptor');
       $locationProvider.html5Mode(true);
       $urlRouterProvider.otherwise("/");
 
@@ -36,6 +68,8 @@
           template: "<fr-account></fr-account>",
           parent: 'app',
           url: "/login",
+          publicOnly: true,
+          // restricted: true,
           resolve: {
             currentUserResolve: currentUserResolve
             }
@@ -44,30 +78,24 @@
           template: "<fr-account></fr-account>",
           parent: 'app',
           url: "/signup",
+          publicOnly: true,
           resolve: {
             currentUserResolve: currentUserResolve
             }
         })
 
     }
+
     function currentUserResolve ($http, activeUserService) {
-      if (localStorage.getItem('token')) {
-        const config = {
-          headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-          }
-        }
-        return $http.get('/api/v1/users/me', config)
+
+        return $http.get('/api/v1/users/me')
           .then(function (response) {
             return activeUserService.setActiveUser(response.data)
           })
           .catch(function () {
             localStorage.clear();
             return activeUserService.setActiveUser(null)
-          })
-        } else {
-          return activeUserService.setActiveUser(null)
-        }
+        })
       }
 
 
