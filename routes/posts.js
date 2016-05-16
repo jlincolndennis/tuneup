@@ -47,7 +47,13 @@ router.get('/', function(req, res, next) {
 
 router.post('/add', authorization, function(req, res, next){
   knex('posts')
-    .insert(req.body)
+    .insert({
+      user_id: req.body.user_id,
+      title: req.body.title,
+      description: req.body.description,
+      votes: req.body.votes,
+      image_url: req.body.image_url
+    })
     .returning('*')
     .then(function(newPost){
       return res.json(newPost[0])
@@ -74,8 +80,11 @@ router.post('/:postId/downvote', authorization, function (req, res, next) {
 })
 
 router.post('/:postId/comments/add', authorization, function(req, res, next) {
+  console.log('req posting comment', req);
   knex('comments')
-  .insert(req.body)
+  .insert({user_id: req.body.user_id,
+          post_id: req.body.post_id,
+          comment: req.body.comment})
   .returning('*')
   .then(function(comment){
     return res.json(comment[0]);
@@ -83,45 +92,53 @@ router.post('/:postId/comments/add', authorization, function(req, res, next) {
 });
 
 router.delete('/:postId', authorization, function(req, res, next) {
-  knex('posts')
-  .where({post_id: req.params.postId})
-  .first()
-  .del()
-  .then(function(response){
-    res.status(200).json({
-      msg: ['success delete']
-    });
-    return
-  })
+  if (req.body.activeUser_id) {
+    knex('posts')
+    .where({post_id: req.params.postId})
+    .first()
+    .del()
+    .then(function(response){
+      res.status(200).json({
+        msg: ['success delete']
+      });
+      return
+    })
+  } else {
+    res.status(403).json({
+      error: ['Cannot delete this item. Proper authorization required!']
+    })
+  }
 });
 
 router.delete('/comments/:commentId', authorization, function(req, res, next) {
-  if (req.body.user_i) {
-
+  if (req.body.activeUser_id) {
+    knex('comments')
+    .where({comment_id: req.params.commentId, user_id:req.body.activeUser_id})
+    .first()
+    .del()
+    .then(function(response){
+      res.status(200).json({
+        msg: ['success delete comment']
+      });
+      return
+    })
+  } else {
+    res.status(403).json({
+      error: ['Cannot delete this item. Proper authorization required!']
+    })
   }
-  knex('comments')
-  .where({comment_id: req.params.commentId})
-  .first()
-  .del()
-  .then(function(response){
-    res.status(200).json({
-      msg: ['success delete comment']
-    });
-    return
-  })
 });
 
 function authorization(req, res, next) {
   if (req.headers.authorization) {
     const token = req.headers.authorization.split(' ')[1];
     const payload = jwt.verify(token, process.env.JWT_SECRET);
-    console.log('headers exist', payload);
+
     req.body.activeUser_id = payload.user_id
-    console.log('req.body', req.body);
     next();
   } else {
     res.status(403).json({
-      error: ['You Must Be Logged In To Vote!']
+      error: ['Authorization Error!']
     })
   }
 
