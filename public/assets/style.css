@@ -6,9 +6,12 @@ body {
 }
 
 .navbar {
-  background: rgb(236, 237, 252);
-
+  background: white;
 }
+
+/*.navbar li {
+  color: white;
+}*/
 
 nav button {
   background: white;
@@ -48,7 +51,16 @@ main {
 }
 
 .post img {
-  width: auto;
+  width: 100%;
+  padding: 5px;
+  border: 1px solid rgb(193, 193, 193);;
+  /*height: 50px;*/
+}
+
+.post {
+  border-bottom: 3px solid purple;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .posVotes {

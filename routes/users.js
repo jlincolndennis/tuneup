@@ -14,19 +14,16 @@ router.get('/me', function (req, res, next) {
      .first()
       .then(function (user) {
        if (user) {
-         console.log('in me route, all good', user);
-
          res.json({user_id: user.user_id, username: user.username})
        } else {
-         console.log('in me route, no id');
-         res.status(403).json({
-           error: "Invalid ID"
+          res.status(403).json({
+           error: ["Invalid ID"]
          })
        }
      })
    } else {
   res.status(200).json({
-    msg: "This is fine, I guess?"
+    msg: ["This is fine, I guess?"]
   })
 }
 })
@@ -118,7 +115,6 @@ router.post('/login', function (req, res, next) {
 
     })
   }
-
 })
 
 module.exports = router;

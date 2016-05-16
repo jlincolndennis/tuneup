@@ -27,6 +27,8 @@
         vm.search = postsService.search;
         vm.logOut = logOut;
 
+
+        vm.activeUser = activeUserService
         activeUserService.getActiveUser()
           .then(function (user) {
             vm.activeUser = user

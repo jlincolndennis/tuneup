@@ -33,7 +33,7 @@
       function submitComment(comment, name){
             return $http.post('/api/v1/posts/'+ comment.post_id +'/comments/add', comment)
               .then(function (res){
-                
+
                  comment.username = name;
                  comment.created_at = res.data.created_at;
                  comment.comment_id = res.data.comment_id;
@@ -62,6 +62,9 @@
         if (direction === 'up') {
           return $http.post('/api/v1/posts/' + post.post_id + '/upvote', post)
             .then(function (res) {
+              if (res.status !== 200) {
+                  return res
+                }
               _posts.forEach(function (item) {
                 if (item.post_id === post.post_id) {
                   item.votes++
@@ -72,6 +75,9 @@
         } else {
           return $http.post('/api/v1/posts/' + post.post_id + '/downvote', post)
             .then(function (res) {
+              if (res.status !== 200) {
+                  return res
+                }
               _posts.forEach(function (item) {
                 if (item.post_id === post.post_id) {
                   item.votes--

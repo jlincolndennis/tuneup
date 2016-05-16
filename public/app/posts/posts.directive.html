@@ -1,11 +1,15 @@
 
 <main class="container-fluid col-md-12">
+
+  <div class="error text-center">
+    <h4>{{vm.errors}}</h4>
+  </div>
   <section ng-repeat="post in vm.posts | orderBy : vm.sort.criteria | filter : vm.search.query" class='col-md-10 col-md-offset-1'>
-    <article class='post jumbotron row'>
+    <article class='post row'>
       <h4>{{post.title}} | <span ng-click="vm.upVote(post)" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span><span ng-class="{posVotes: post.votes > 0, negVotes: post.votes < 0 }"ng-bind="post.votes"></span><span ng-click="vm.downVote(post)" class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span></h4>
 
-      <div class="thumbnail col-md-3">
-        <a ng-href={{post.image_url}} target='blank'><img ng-src={{post.image_url}} alt=""></a>
+      <div class="col-md-2">
+        <a ng-href={{post.image_url}} target='blank'><img class="img-responsive" ng-src={{post.image_url}} alt=""></a>
       </div>
       <div class="col-md-9">
         <h5>Posted by: {{post.username}}</h5>

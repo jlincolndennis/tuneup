@@ -15,14 +15,11 @@
       }
 
      function setActiveUser (user){
-
        return  _user = user;
-
      }
 
      function getActiveUser (){
        return $q(function (resolve, reject) {
-           
            resolve( _user)
 
        })

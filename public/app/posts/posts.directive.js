@@ -44,14 +44,27 @@
           return vm.posts = posts;
         });
 
+
         function voteUp(post) {
-          postsService.updateVote(post, 'up');
-          return
+          postsService.updateVote(post, 'up')
+            .then(function(res){
+              if (res.data) {
+                vm.errors = res.data.error[0]
+              } else {
+                return
+              }
+          })
         }
 
         function voteDown(post) {
-          postsService.updateVote(post, 'down');
-          return
+          postsService.updateVote(post, 'down')
+            .then(function(res){
+              if (res.data) {
+                vm.errors = res.data.error[0]
+              } else {
+                return
+              }
+            })
         }
 
         function showComments(post) {

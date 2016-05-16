@@ -38,10 +38,8 @@
         responseError: function (response) {
           if (response.status === 403){
             localStorage.removeItem('token');
-            console.log('Did this do it?');
           $location.path('/')
           }
-          console.log('hmmmmmmm', response);
           return response
 
         }
