@@ -1,17 +1,20 @@
 body {
-  /*background-color: rgb(77, 77, 77);*/
+    background: rgb(240, 240, 240);
 }
+
 .account-portal {
   margin-top: 100px
 }
 
 .navbar {
-  background: white;
+  background: rgb(205, 10, 28);
+  padding-top: 50px;
+  /*padding-bottom: 10px;*/
 }
 
-/*.navbar li {
-  color: white;
-}*/
+.icon-bar {
+  background: white;
+}
 
 nav button {
   background: white;
@@ -21,13 +24,40 @@ nav .dropdown-menu li {
   cursor: pointer;
 }
 
+.navbar-brand {
+  padding-left: 30px;
+  padding-bottom: 25px;
+  height: auto;
+  font-size: 4em;
+  font-weight: lighter;
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+}
+
+.navbar-default .navbar-brand:hover{
+  color:rgb(232, 232, 232);
+}
+
+.navbar-default .navbar-nav>li>a {
+  color: white;
+  font-size: 1.1em;
+  /*padding-bottom: 0px;*/
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+  color:rgb(232, 232, 232);
+
+}
+
 .modal-header {
-  background: purple;
+  background: rgb(205, 10, 28);
   color: white
 }
 
 .submit-button {
-  background: purple;
+  background: rgb(205, 10, 28);
   color: white;
 }
 
@@ -47,29 +77,32 @@ nav .dropdown-menu li {
 
 
 main {
-  margin-top: 80px;
+  margin-top: 125px;
 }
 
 .post img {
+  margin-top: 10px;
   width: 100%;
   padding: 5px;
   border: 1px solid rgb(193, 193, 193);;
-  /*height: 50px;*/
+
 }
 
 .post {
-  border-bottom: 3px solid purple;
-  padding-bottom: 30px;
-  margin-bottom: 30px;
+  background: white;
+  border-top: 2px solid rgb(205, 10, 28);
+  padding: 15px;
+  margin-bottom: 50px;
 }
 
-.posVotes {
+/*.posVotes {
   color: green
 }
 
 .negVotes {
   color: red;
-}
+}*/
+
 .post p {
   font-size: 1em;
 }
@@ -83,14 +116,18 @@ main {
   background-color: rgb(77, 77, 77);
 }
 
-.glyphicon {
+.post .glyphicon {
   font-size: 1.1em;
-  color: purple;
+  color: rgb(205, 10, 28);
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */
   -khtml-user-select: none;    /* Konqueror */
   -moz-user-select: none;      /* Firefox */
   -ms-user-select: none;       /* Internet Explorer/Edge */
+}
+
+.logo-up {
+  font-weight: normal;
 }
 
 .glyphicon:hover {
