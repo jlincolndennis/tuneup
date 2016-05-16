@@ -12,24 +12,25 @@
   ];
 
   function accountFactory ($log, $http, $state, $window) {
-    var _errors = [];
+    var _logInErrors = [];
+    var _signUpErrors = [];
 
     return {
       createUser: createUser,
       logIn: logIn,
       logOut: logOut,
-      getErrors: getErrors
+      getSignUpErrors: getSignUpErrors,
+      getLogInErrors: getLogInErrors
     }
 
     function createUser (user){
-      _errors.length = 0;
+      _signUpErrors.length = 0;
       return $http.post('/api/v1/users/signup', user)
       .then(function (res){
         if(res.status !== 200) {
-          _errors.push(res.data.errors[0])
+          _signUpErrors.push(res.data.errors[0])
         }
         if (res.data.token !== undefined) {
-          console.log('IN THE FRONT BITCHES');
           $window.localStorage.setItem('token', res.data.token)
           $state.go('posts', {}, {reload:true});
         }
@@ -37,15 +38,15 @@
     }
 
     function logIn(user) {
-      _errors.length = 0;
+      _logInErrors.length = 0;
       return $http.post('/api/v1/users/login', user)
         .then (function(res){
 
           if(res.status !== 200) {
-            _errors.push(res.data.errors[0])
+            _logInErrors.push(res.data.errors[0])
+
           }
           if (res.data.token !== undefined) {
-            console.log('IN THE FRONT BITCHES');
             $window.localStorage.setItem('token', res.data.token)
             $state.go('posts', {}, {reload:true});
           }
@@ -56,13 +57,15 @@
     }
 
     function logOut (){
-      console.log('log out in service');
       $window.localStorage.clear();
     }
 
-    function getErrors() {
-      return _errors
+    function getLogInErrors() {
+      return _logInErrors
+    }
 
+    function getSignUpErrors() {
+      return _signUpErrors
     }
   }
 

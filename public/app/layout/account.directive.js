@@ -20,7 +20,8 @@
         var vm = this;
         vm.signUpSubmit = signUpSubmit;
         vm.logInSubmit = logInSubmit;
-        vm.errors = accountService.getErrors();
+        vm.signUpErrors = accountService.getSignUpErrors();
+        vm.logInErrors = accountService.getLogInErrors();
 
         function signUpSubmit(form) {
           var newUser = angular.copy(vm.newUser);

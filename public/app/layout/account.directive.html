@@ -7,15 +7,16 @@
         <h4 class="modal-title text-center">Account Portal</h4>
       </div>
       <div class="row">
-        <div class="error text-center" ng-repeat="error in vm.errors">
-          <h4>{{error}}</h4>
-        </div>
+
+
         <div class="modal-body">
         <div class="col-md-4 col-md-offset-1">
           <p><em>If You <strong>Have</strong> An Account...</em></p>
           <h2 class="text-center">Log In!</h2>
           <hr>
-
+          <div class="error text-center" ng-repeat="error in vm.logInErrors">
+            <h4>{{error}}</h4>
+          </div>
           <form name="logInForm" ng-submit="vm.logInSubmit(logInForm)">
             <fieldset class="form-group" ng-class="{'has-error': logInForm.email.$invalid && logInForm.email.$touched, 'has-success': logInForm.email.$valid}">
               <label for="email">Email:</label>
@@ -42,6 +43,9 @@
           <p><em>If You <strong>Need</strong> An Account...</em></p>
           <h2 class="text-center">Sign Up!</h2>
           <hr>
+          <div class="error text-center" ng-repeat="error in vm.signUpErrors">
+            <h4>{{error}}</h4>
+          </div>
           <form name="signUpForm" ng-submit="vm.signUpSubmit(signUpForm)">
             <fieldset class="form-group" ng-class="{'has-error': signUpForm.username.$invalid && signUpForm.username.$touched, 'has-success': signUpForm.username.$valid}">
               <label for="username">Choose a Username:</label>
