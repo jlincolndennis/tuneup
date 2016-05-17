@@ -1,5 +1,6 @@
 body {
     background: rgb(240, 240, 240);
+    color: rgb(60, 60, 60);
 }
 
 .account-portal {
@@ -8,31 +9,37 @@ body {
 
 .navbar {
   background: rgb(205, 10, 28);
-  padding-top: 50px;
+  padding-top: 30px;
   /*padding-bottom: 10px;*/
 }
 
-.icon-bar {
-  background: white;
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: white;
 }
 
-nav button {
-  background: white;
-}
 
 nav .dropdown-menu li {
   cursor: pointer;
 }
 
+/*nav input {
+  margin-bottom: 10px;
+}*/
+
 .navbar-brand {
   padding-left: 30px;
-  padding-bottom: 25px;
-  height: auto;
+  padding-bottom: 0px;
+  margin-bottom: 10px;
   font-size: 4em;
   font-weight: lighter;
 }
 
 .navbar-default .navbar-brand {
+  color: white;
+  /*margin*/
+}
+
+.navbar-default .navbar-brand:focus {
   color: white;
 }
 
@@ -48,7 +55,57 @@ nav .dropdown-menu li {
 
 .navbar-default .navbar-nav>li>a:hover {
   color:rgb(232, 232, 232);
+}
 
+.navbar-default .navbar-nav>li>a:focus {
+color: white;
+}
+
+.navbar-default .navbar-text {
+  color: white;
+  font-size: 1.1em;
+  padding: 10px 15px;
+  margin: 0px;
+}
+
+.navbar-default .navbar-collapse {
+  border: none;
+}
+
+.navbar-default .navbar-toggle {
+  border: none;
+  color: white;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  border: none;
+  background: rgb(205, 10, 28);
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover  {
+  background: rgb(205, 10, 28);
+  color: white;
+  box-shadow: none;
+}
+
+@media (max-width: 767px){
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+    color: #ffffff;
+  }
+
+  .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover {
+      color:rgb(232, 232, 232);
+    }
+}
+
+.nav>li>p {
+  /*padding: 0px 15px;*/
+}
+
+.navbar-form {
+  border: none;
+  /*width: 70%;*/
 }
 
 .modal-header {
@@ -62,7 +119,7 @@ nav .dropdown-menu li {
 }
 
 .submit-button:hover {
-  background: rgb(152, 110, 159);
+  background: rgb(171, 67, 63);;
   color: white;
 }
 
@@ -76,7 +133,7 @@ nav .dropdown-menu li {
 }
 
 
-main {
+main, .account-portal {
   margin-top: 125px;
 }
 
@@ -145,7 +202,8 @@ main {
 .error {
   color: rgb(171, 67, 63);
 }
-/*.ng-move {
+
+.ng-move {
   animation: fadeIn .3s;
 }
 
@@ -167,4 +225,4 @@ main {
 
 .ng-enter:not(.comments) {
   animation: fadeIn .3s;
-}*/
+}

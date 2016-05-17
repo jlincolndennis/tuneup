@@ -21,11 +21,11 @@
       <ul class="nav navbar-nav">
         <form class="navbar-form navbar-left" role="search">
           <div class="form-group">
-            <input type="text" class="form-control" ng-model='vm.search.query' placeholder="Search">
+            <input type="text" class="form-control" ng-model='vm.search.query' placeholder="Search...">
           </div>
         </form>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort by... <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sort by... <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a ng-click="vm.changeSortCriteria('-votes')">Most Votes</a></li>
             <li><a ng-click="vm.changeSortCriteria('title')">Alphabetically</a></li>
@@ -34,8 +34,8 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      <li ng-show="vm.activeUser.user_id"><a> Welcome, {{vm.activeUser.username}}!</a></li>
-      <li ng-show="vm.activeUser.user_id"><a data-toggle="modal" data-target="#postCreate">
+      <li ng-show="vm.activeUser.user_id"><a href="#"> Welcome, {{vm.activeUser.username}}!</a></li>
+      <li ng-show="vm.activeUser.user_id"><a href="#" data-toggle="modal" data-target="#postCreate">
         <span class="glyphicon glyphicon-play" aria-hidden="true"></span> Submit a Post</a></li>
       <li ng-hide="vm.activeUser.user_id"><a ui-sref="login">Log In</a></li>
       <li ng-hide="vm.activeUser.user_id"><a ui-sref="signup">Sign Up</a></li>
