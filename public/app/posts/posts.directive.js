@@ -74,7 +74,6 @@
         function commentFormSubmit(form) {
           var newComment = angular.copy(vm.comment);
           newComment.post_id = vm.activePostId;
-          // until resolves set up
           newComment.user_id = vm.activeUser.user_id
           postsService.submitComment(newComment, vm.activeUser.username);
           vm.comment = null;

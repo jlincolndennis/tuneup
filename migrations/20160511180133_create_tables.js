@@ -12,8 +12,10 @@ exports.up = function(knex, Promise) {
       table.increments('post_id');
       table.string('title');
       table.text('description');
+      table.string('track');
+      table.text('track_url');
       table.integer('votes');
-      table.text('image_url');
+      table.text('cover_url');
       table.integer('user_id').references('users.user_id').onDelete('CASCADE').onUpdate('CASCADE');
       table.timestamp('created_at').notNullable().defaultTo(knex.raw('now()'));
     })

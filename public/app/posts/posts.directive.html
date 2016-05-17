@@ -9,7 +9,7 @@
 
 
       <div class="cover-image col-md-2">
-        <a ng-href={{post.image_url}} target='blank'><img class="img-responsive" ng-src={{post.image_url}} alt=""></a>
+        <a ng-href={{post.cover_url}} target='blank'><img class="img-responsive" ng-src={{post.cover_url}} alt=""></a>
 
         <div class="text-center"><h4>
         <span ng-click="vm.upVote(post)" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
@@ -20,6 +20,7 @@
       <div class="col-md-9">
         <h4>{{post.title}}</h4>
         <h5>Posted by: {{post.username}}</h5>
+        <p><strong>Best Track: </strong><a ng-href={{post.track_url}} target="_blank">{{post.track}}</a></p>
         <p>{{post.description}}</p>
 
         <p><span class="glyphicon glyphicon-calendar" aria-hidden="true"> </span> {{post.created_at | amCalendar}} | <span ng-click="vm.showComments(post)" class="glyphicon glyphicon-comment" aria-hidden="true"></span> View

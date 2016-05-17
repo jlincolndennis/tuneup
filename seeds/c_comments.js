@@ -38,17 +38,17 @@ exports.seed = function(knex, Promise) {
     knex('comments')
       .insert({
         user_id: 2,
-        post_id: 4,
+        post_id: 2,
         comment: 'When he was ten his father split, full of it, debt-ridden Two years later, see Alex and his mother bed-ridden Half-dead sittin in their own sick, the scent thick'}),
     knex('comments')
       .insert({
         user_id: 3,
-        post_id: 4,
+        post_id: 1,
         comment: 'And Alex got better but his mother went quick. Moved in with a cousin, the cousin committed suicide. Left him with nothin but ruined pride, something new inside, A voice saying...'}),
     knex('comments')
       .insert({
         user_id: 3,
-        post_id: 5,
+        post_id: 3,
         comment: 'Alex, you gotta fend for yourself. He started retreatin and readin every treatise on the shelf.'})
 
   );

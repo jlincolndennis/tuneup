@@ -152,6 +152,11 @@ main, .account-portal {
   margin-bottom: 50px;
 }
 
+.post a {
+  color: rgb(205, 10, 28);
+  font-weight: bold;
+}
+
 /*.posVotes {
   color: green
 }

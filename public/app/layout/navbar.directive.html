@@ -59,28 +59,44 @@
       <div class="modal-body">
         <form name="postForm" novalidate ng-submit="vm.postFormSubmit(postForm)">
           <fieldset class="form-group" ng-class="{'has-error': postForm.title.$invalid && postForm.title.$touched, 'has-success': postForm.title.$valid}">
-            <label class="control-label">Title</label>
-            <input type="text" class="form-control" name="title" ng-model="vm.post.title" required placeholder="Enter a title">
+            <label class="control-label">Headline</label>
+            <input type="text" class="form-control" name="title" ng-model="vm.post.title" required placeholder="Enter a Headline">
             <div ng-messages="postForm.title.$error" ng-if="postForm.title.$touched">
-              <p ng-message="required" class="control-label">Title is required.</p>
+              <p ng-message="required" class="control-label">Headline is required.</p>
             </div>
           </fieldset>
           <fieldset class="form-group" ng-class="{'has-error': postForm.description.$invalid && postForm.description.$touched, 'has-success': postForm.description.$valid}">
             <label class="control-label">Description</label>
-            <input type="text" class="form-control" name="description" ng-model="vm.post.description" required ng-minlength="3" placeholder="Enter a description">
+            <input type="text" class="form-control" name="description" ng-model="vm.post.description" required ng-minlength="3" placeholder="Enter a Description">
             <div ng-messages="postForm.description.$error" ng-if="postForm.description.$touched">
               <p ng-message="minlength" class="control-label">Description must be at least 3 characters</p>
               <p ng-message="required" class="control-label">Desription is required.</p>
             </div>
           </fieldset>
-          <fieldset class="form-group" ng-class="{'has-error': postForm.image.$invalid && postForm.image.$touched, 'has-success': postForm.image.$valid}">
-            <label class="control-label">Image URL</label>
-            <input type="url" class="form-control" name="image" ng-model="vm.post.image_url" required placeholder="Enter an image URL">
-            <div ng-messages="postForm.image.$error" ng-if="postForm.image.$touched">
-              <p ng-message="required" class="control-label">An image URL is required.</p>
-              <p ng-message="url" class="control-label">A valid image URL is required.</p>
+          <fieldset class="form-group" ng-class="{'has-error': postForm.cover.$invalid && postForm.cover.$touched, 'has-success': postForm.cover.$valid}">
+            <label class="control-label">Cover Art Link (Square images, please!)</label>
+            <input type="url" class="form-control" name="cover" ng-model="vm.post.cover_url" required placeholder="Enter a Cover Art Link">
+            <div ng-messages="postForm.cover.$error" ng-if="postForm.cover.$touched">
+              <p ng-message="required" class="control-label">A Cover URL is required.</p>
+              <p ng-message="url" class="control-label">A valid Cover URL is required.</p>
             </div>
           </fieldset>
+          <fieldset class="form-group" ng-class="{'has-error': postForm.track.$invalid && postForm.track.$touched, 'has-success': postForm.track.$valid}">
+            <label class="control-label">Title of Best Track</label>
+            <input type="text" class="form-control" name="track" ng-model="vm.post.track" required placeholder="Enter the Best Track">
+            <div ng-messages="postForm.track.$error" ng-if="postForm.track.$touched">
+              <p ng-message="required" class="control-label">Best Track is required.</p>
+            </div>
+          </fieldset>
+          <fieldset class="form-group" ng-class="{'has-error': postForm.track_url.$invalid && postForm.track_url.$touched, 'has-success': postForm.track_url.$valid}">
+            <label class="control-label">Best Track Link (i.e. from youTube, SoundClound)</label>
+            <input type="url" class="form-control" name="track_url" ng-model="vm.post.track_url" required placeholder="Enter a Track Link">
+            <div ng-messages="postForm.track_url.$error" ng-if="postForm.track_url.$touched">
+              <p ng-message="required" class="control-label">A Track Link is required.</p>
+              <p ng-message="url" class="control-label">A valid Track Link is required.</p>
+            </div>
+          </fieldset>
+
           <div class="modal-footer">
             <button type="button" class="btn cancel-button" data-dismiss="modal" ng-click="vm.postFormClose(postForm)">Close</button>
             <button type="submit" class="btn submit-button" data-toggle="modal" data-target="#postCreate" ng-disabled="postForm.$invalid">Submit Post</button>

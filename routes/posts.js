@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 
    knex('posts')
   .innerJoin('users', 'posts.user_id', 'users.user_id')
-  .select('posts.title', 'posts.description', 'posts.votes', 'posts.image_url', 'posts.created_at', 'users.username', 'posts.post_id', 'posts.user_id')
+  .select('posts.title', 'posts.description', 'posts.votes', 'posts.cover_url','posts.track', 'posts.track_url', 'posts.created_at', 'users.username', 'posts.post_id', 'posts.user_id')
   .then(function(data){
 
     data.forEach(function (item){
@@ -17,7 +17,9 @@ router.get('/', function(req, res, next) {
         user_id: item.user_id,
         title: item.title,
         description: item.description,
-        image_url: item.image_url,
+        cover_url: item.cover_url,
+        track: item.track,
+        track_url: item.track_url,
         votes: item.votes,
         username: item.username,
         created_at: item.created_at,
@@ -52,7 +54,9 @@ router.post('/add', authorization, function(req, res, next){
       title: req.body.title,
       description: req.body.description,
       votes: req.body.votes,
-      image_url: req.body.image_url
+      cover_url: req.body.cover_url,
+      track: req.body.track,
+      track_url: req.body.track_url
     })
     .returning('*')
     .then(function(newPost){
