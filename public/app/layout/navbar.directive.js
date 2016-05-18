@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')
-    .directive('frNavBar', navDirective);
+    .directive('tuNavBar', navDirective);
 
       function navDirective() {
         return {

@@ -2,7 +2,7 @@
   'use strict';
 
     angular.module('app')
-      .directive('frAccount', accountDirective);
+      .directive('tuAccount', accountDirective);
 
       function accountDirective (){
         return {

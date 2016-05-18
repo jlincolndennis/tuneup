@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.posts')
-    .directive('frPosts', postsDirective);
+    .directive('tuPosts', postsDirective);
 
       function postsDirective() {
         return {

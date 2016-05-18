@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')
-    .directive('fauxReddit', appDirective);
+    .directive('tuneUp', appDirective);
 
       function appDirective() {
         return {

@@ -58,10 +58,10 @@
       $stateProvider
         .state('app', {
           abstract: true,
-          template: "<faux-reddit></faux-reddit>",
+          template: "<tune-up></tune-up>",
         })
         .state('posts',{
-          template: "<fr-posts></fr-posts>",
+          template: "<tu-posts></tu-posts>",
           parent: 'app',
           url: "/",
           resolve: {
@@ -69,7 +69,7 @@
           },
         })
         .state('login',{
-          template: "<fr-account></fr-account>",
+          template: "<tu-account></tu-account>",
           parent: 'app',
           url: "/login",
           publicOnly: true,
@@ -79,7 +79,7 @@
             }
         })
         .state('signup',{
-          template: "<fr-account></fr-account>",
+          template: "<tu-account></tu-account>",
           parent: 'app',
           url: "/signup",
           publicOnly: true,

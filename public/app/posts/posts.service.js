@@ -12,7 +12,6 @@
 
       return {
         getPosts: getPosts,
-
         submitComment: submitComment,
         submitPost: submitPost,
         updateVote: updateVote,
