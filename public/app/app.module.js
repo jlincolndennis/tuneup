@@ -16,7 +16,6 @@
 
         if(toState.publicOnly && localStorage.getItem('token')) {
           event.preventDefault();
-          console.log('Or was it this?');
           $state.go('posts')
         }
       });

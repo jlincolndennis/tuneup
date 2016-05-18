@@ -99,7 +99,7 @@
 
     function deleteComment (comment) {
 
-      return $http.delete('/api/v1/posts/comments/' + comment.comment_id)
+      return $http.delete('/api/v1/posts/'+ comment.post_id +'/comments/' + comment.comment_id)
       .then(function (res){
         _posts.forEach(function (item){
           if (item.post_id === comment.post_id){

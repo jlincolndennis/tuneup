@@ -114,7 +114,7 @@ router.delete('/:postId', authorization, function(req, res, next) {
   }
 });
 
-router.delete('/comments/:commentId', authorization, function(req, res, next) {
+router.delete('/:postId/comments/:commentId', authorization, function(req, res, next) {
   if (req.user.user_id) {
     knex('comments')
     .where({comment_id: req.params.commentId, user_id: req.user.user_id})
@@ -145,7 +145,7 @@ function authorization(req, res, next) {
             error: ['Authorization Error!']
           })
         }
-        req.user = user
+        req.user = user[0]
       })
     next();
   } else {
